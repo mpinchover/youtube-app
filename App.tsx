@@ -4,6 +4,14 @@ import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { StyleSheet, Text, View } from "react-native";
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
+import {
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from "recoil";
+
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Screen2 from "./src/screens/screen_two";
@@ -29,36 +37,38 @@ const MainScreens = ({ navigation }) => {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Group
-          screenOptions={({ navigation, route }) => {
-            return {
-              headerTitle: getHeaderTitle(route),
-            };
-          }}
-        >
-          <Stack.Screen
-            options={({ route }) => {
+    <RecoilRoot>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Group
+            screenOptions={({ navigation, route }) => {
               return {
                 headerTitle: getHeaderTitle(route),
               };
             }}
-            name="MainScreens"
-            component={MainScreens}
-          />
-          <Stack.Screen
-            options={({ route }) => {
-              return {
-                headerTitle: "Something", // set it through global state
-              };
-            }}
-            name="MessageChat"
-            component={MessageChat}
-          />
-        </Stack.Group>
-      </Stack.Navigator>
-    </NavigationContainer>
+          >
+            <Stack.Screen
+              options={({ route }) => {
+                return {
+                  headerTitle: getHeaderTitle(route),
+                };
+              }}
+              name="MainScreens"
+              component={MainScreens}
+            />
+            <Stack.Screen
+              options={({ route }) => {
+                return {
+                  headerTitle: "Something", // set it through global state
+                };
+              }}
+              name="MessageChat"
+              component={MessageChat}
+            />
+          </Stack.Group>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </RecoilRoot>
   );
 }
 

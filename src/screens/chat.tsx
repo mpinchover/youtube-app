@@ -2,6 +2,15 @@ import { StatusBar } from "expo-status-bar";
 import { Button, StyleSheet, Text, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
+import {
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from "recoil";
+import { textState } from "../recoil/test/test";
+
 import { useState } from "react";
 import { Link } from "expo-router";
 const Stack = createStackNavigator();
@@ -30,14 +39,22 @@ export const MessageChat = ({ navigation, route }) => {
 };
 
 export function Chat(props) {
+  const [text, setText] = useRecoilState(textState);
+
   const { navigation } = props;
+
   return (
     <View style={styles.container}>
       <Text>Message List</Text>
       <StatusBar style="auto" />
+      <Text>{text}</Text>
       <Button
         title="Click me"
         onPress={() => navigation.navigate("MessageChat")}
+      />
+      <Button
+        title="Click me to set text"
+        onPress={() => setText("New text state")}
       />
     </View>
   );
