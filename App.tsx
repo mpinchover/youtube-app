@@ -4,18 +4,15 @@ import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { StyleSheet, Text, View } from "react-native";
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import {
-  RecoilRoot,
-  atom,
-  selector,
-  useRecoilState,
-  useRecoilValue,
-} from "recoil";
+import { Entypo, FontAwesome } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { RecoilRoot } from "recoil";
 
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Screen2 from "./src/screens/screen_two";
 import { Chat, MessageChat } from "./src/screens/chat";
+import Matching from "./src/screens/matching";
 
 const Tab = createBottomTabNavigator();
 
@@ -28,7 +25,48 @@ const getHeaderTitle = (route) => {
 
 const MainScreens = ({ navigation }) => {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator
+      screenOptions={({ route }) => {
+        let icon;
+        if (route.name === "Settings") {
+          icon = (
+            <MaterialCommunityIcons name="account" size={24} color="black" />
+          );
+        } else if (route.name === "MessageList") {
+          icon = <Entypo name="chat" size={24} color="black" />;
+        } else {
+          icon = <FontAwesome name="snapchat" size={24} color="black" />;
+        }
+        return {
+          tabBarIcon: ({ focused, color, size }) => {
+            console.log("focused is ", focused, route.name);
+            if (focused) {
+              color = "black";
+            } else {
+              color = "grey";
+            }
+            let icon;
+            if (route.name === "Settings") {
+              icon = (
+                <MaterialCommunityIcons
+                  name="account"
+                  size={24}
+                  color={color}
+                />
+              );
+            } else if (route.name === "MessageList") {
+              icon = <Entypo name="chat" size={24} color={color} />;
+            } else {
+              icon = <FontAwesome name="snapchat" size={24} color={color} />;
+            }
+            return icon;
+          },
+          headerShown: false,
+          tabBarShowLabel: false,
+        };
+      }}
+    >
+      <Tab.Screen name="Matching" component={Matching} />
       <Tab.Screen name="MessageList" component={Chat} />
       <Tab.Screen name="Settings" component={Screen2} />
     </Tab.Navigator>
