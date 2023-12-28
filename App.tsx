@@ -10,7 +10,7 @@ import { RecoilRoot } from "recoil";
 
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Screen2 from "./src/screens/screen_two";
+import Screen2 from "./src/screens/settings";
 import { Chat, MessageChat } from "./src/screens/chat";
 import Matching from "./src/screens/matching";
 
