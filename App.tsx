@@ -39,7 +39,6 @@ const MainScreens = ({ navigation }) => {
         }
         return {
           tabBarIcon: ({ focused, color, size }) => {
-            console.log("focused is ", focused, route.name);
             if (focused) {
               color = "black";
             } else {
