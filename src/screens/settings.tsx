@@ -33,13 +33,45 @@ const linkItems = [
   {
     title: "Best deals of 2023 on Amazon",
   },
-  {
-    title:
-      "Blender hacks for Blender 3.2. How to model like a pro and get your work noticed by the top VFX studios",
-  },
-  {
-    title: "Halo 2: behind the scenes with the studio",
-  },
+  // {
+  //   title:
+  //     "Blender hacks for Blender 3.2. How to model like a pro and get your work noticed by the top VFX studios",
+  // },
+  // {
+  //   title: "Halo 2: behind the scenes with the studio",
+  // },
+  // {
+  //   title: "How to grow your own candy",
+  // },
+  // {
+  //   title: "Miley Cryus live at the Grand Fox stadium",
+  // },
+  // {
+  //   title: "Best deals of 2023 on Amazon",
+  // },
+  // {
+  //   title:
+  //     "Blender hacks for Blender 3.2. How to model like a pro and get your work noticed by the top VFX studios",
+  // },
+  // {
+  //   title: "Halo 2: behind the scenes with the studio",
+  // },
+  // {
+  //   title: "How to grow your own candy",
+  // },
+  // {
+  //   title: "Miley Cryus live at the Grand Fox stadium",
+  // },
+  // {
+  //   title: "Best deals of 2023 on Amazon",
+  // },
+  // {
+  //   title:
+  //     "Blender hacks for Blender 3.2. How to model like a pro and get your work noticed by the top VFX studios",
+  // },
+  // {
+  //   title: "Halo 2: behind the scenes with the studio",
+  // },
 ];
 export default function Settings() {
   const [visible, setVisible] = useState(true);
@@ -60,20 +92,44 @@ export default function Settings() {
 
   return (
     <View style={styles.container}>
-      <Text h3 style={styles.header}>
+      <Text h4 style={styles.header}>
         Account
       </Text>
       <Input
+        inputStyle={styles.inputStyle}
         placeholder="Email"
-        leftIcon={{ type: "material-icons", name: "email", color: "grey" }}
+        leftIcon={{
+          type: "material-icons",
+          name: "email",
+          color: "grey",
+          size: 16,
+        }}
+        rightIcon={{
+          type: "ant-design",
+          name: "edit",
+          color: "grey",
+          size: 16,
+        }}
         inputContainerStyle={styles.inputContainerStyle}
       />
       <Input
+        inputStyle={styles.inputStyle}
         placeholder="Mobile"
-        leftIcon={{ type: "material-icons", name: "phone", color: "grey" }}
+        leftIcon={{
+          type: "material-icons",
+          name: "phone",
+          color: "grey",
+          size: 16,
+        }}
+        rightIcon={{
+          type: "ant-design",
+          name: "edit",
+          color: "grey",
+          size: 16,
+        }}
         inputContainerStyle={styles.inputContainerStyle}
       />
-      <Text h3 style={styles.header}>
+      <Text h4 style={styles.header}>
         Matching
       </Text>
 
@@ -83,20 +139,15 @@ export default function Settings() {
         title="Add Youtube link"
         type="clear"
       />
-      <View>
+      <View style={styles.linksContainer}>
         <FlatList
+          contentContainerStyle={{
+            paddingBottom: 200,
+          }}
           keyExtractor={keyExtractor}
           data={linkItems}
           renderItem={renderItem}
         />
-
-        {linkItems.map((e, i) => {
-          return (
-            <ListItem key={i} bottomDivider={i < linkItems.length - 1}>
-              <YoutubeLinkItem title={e.title} />
-            </ListItem>
-          );
-        })}
       </View>
     </View>
   );
@@ -125,8 +176,9 @@ const styles = StyleSheet.create({
   overlay: {
     width: Dimensions.get("window").width - 1000,
     justifyContent: "flex-start",
-    // position: "relative",
-    // width: "100%",
+  },
+  inputStyle: {
+    fontSize: 14,
   },
   inputContainerStyle: {
     borderWidth: 1,
@@ -139,6 +191,9 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
     alignSelf: "flex-start",
     // marginLeft: 10,
+  },
+  linksContainer: {
+    paddingBottom: 100,
   },
   container: {
     flex: 1,
