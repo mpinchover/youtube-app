@@ -1,16 +1,62 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
-import { Input, Icon, Text, Button, Overlay } from "@rneui/themed";
+import { StyleSheet, View, FlatList } from "react-native";
+import { Input, Icon, Text, Button, Overlay, ListItem } from "@rneui/themed";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Dimensions } from "react-native";
 import { useState } from "react";
+import YoutubeLinkItem from "../components/youtube-link-item";
+
+const linkItems = [
+  {
+    title: "How to grow your own candy",
+  },
+  {
+    title: "Miley Cryus live at the Grand Fox stadium",
+  },
+  {
+    title: "Best deals of 2023 on Amazon",
+  },
+  {
+    title:
+      "Blender hacks for Blender 3.2. How to model like a pro and get your work noticed by the top VFX studios",
+  },
+  {
+    title: "Halo 2: behind the scenes with the studio",
+  },
+  {
+    title: "How to grow your own candy",
+  },
+  {
+    title: "Miley Cryus live at the Grand Fox stadium",
+  },
+  {
+    title: "Best deals of 2023 on Amazon",
+  },
+  {
+    title:
+      "Blender hacks for Blender 3.2. How to model like a pro and get your work noticed by the top VFX studios",
+  },
+  {
+    title: "Halo 2: behind the scenes with the studio",
+  },
+];
 export default function Settings() {
   const [visible, setVisible] = useState(true);
 
   const toggleOverlay = () => {
     setVisible(!visible);
   };
+
+  const renderItem = ({ item }) => {
+    return (
+      <ListItem>
+        <YoutubeLinkItem title={item.title} />
+      </ListItem>
+    );
+  };
+
+  const keyExtractor = (item, index) => index.toString();
 
   return (
     <View style={styles.container}>
@@ -32,17 +78,32 @@ export default function Settings() {
       </Text>
 
       <Button
-        style={styles.button}
-        title="Paste and add Youtube link"
-        type="clear"
-      />
-      <Button
         onPress={toggleOverlay}
         style={styles.button}
         title="Add Youtube link"
         type="clear"
       />
-      <Overlay
+      <View>
+        <FlatList
+          keyExtractor={keyExtractor}
+          data={linkItems}
+          renderItem={renderItem}
+        />
+
+        {linkItems.map((e, i) => {
+          return (
+            <ListItem key={i} bottomDivider={i < linkItems.length - 1}>
+              <YoutubeLinkItem title={e.title} />
+            </ListItem>
+          );
+        })}
+      </View>
+    </View>
+  );
+}
+
+/*
+     {/* <Overlay
         style={styles.overlay}
         isVisible={visible}
         onBackdropPress={toggleOverlay}
@@ -53,11 +114,9 @@ export default function Settings() {
           inputContainerStyle={styles.inputContainerStyle}
         />
         <Text style={styles.overlay}>Hello!</Text>
-        {/* <Button type="clear" title="Add link" onPress={toggleOverlay} /> */}
+        {/* <Button type="clear" title="Add link" onPress={toggleOverlay} /> }
       </Overlay>
-    </View>
-  );
-}
+       */
 
 const styles = StyleSheet.create({
   header: {
@@ -79,7 +138,7 @@ const styles = StyleSheet.create({
     // alignItems: "flex-start",
     // borderWidth: 1,
     alignSelf: "flex-start",
-    marginLeft: 10,
+    // marginLeft: 10,
   },
   container: {
     flex: 1,
