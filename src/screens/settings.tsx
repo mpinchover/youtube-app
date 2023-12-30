@@ -1,12 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, FlatList } from "react-native";
-import { Input, Icon, Text, Button, Overlay, ListItem } from "@rneui/themed";
+import { Input, Icon, Text, Button, Slider, ListItem } from "@rneui/themed";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Dimensions } from "react-native";
 import { useState } from "react";
 import YoutubeLinkItem from "../components/youtube-link-item";
 import Label from "../components/label";
+import MultiSlider from "@ptomasroos/react-native-multi-slider";
 
 const linkItems = [
   {
@@ -76,6 +77,9 @@ const linkItems = [
 ];
 export default function Settings() {
   const [visible, setVisible] = useState(true);
+  const [multiSliderValue, setMultiSliderValue] = useState([3, 7]);
+
+  const multiSliderValuesChange = (values) => setMultiSliderValue(values);
 
   const toggleOverlay = () => {
     setVisible(!visible);
@@ -97,6 +101,20 @@ export default function Settings() {
         Account
       </Text>
       <Label label="Name" value="Matt" />
+      <Label label="Date of birth" value="8/31/1994" />
+      <Label label="Gender" value="Male" />
+      <Label label="Gender preference" value="Female" />
+
+      <MultiSlider
+        values={multiSliderValue}
+        onValuesChange={multiSliderValuesChange}
+        min={0}
+        max={10}
+        step={1}
+        snapped
+        // minMarkerOverlapDistance={4}
+      />
+
       <Input
         inputStyle={styles.inputStyle}
         placeholder="Email"

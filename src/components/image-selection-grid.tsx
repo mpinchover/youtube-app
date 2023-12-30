@@ -1,7 +1,7 @@
-import { View } from "react-native"
+import { View } from "react-native";
 
 const ImageSelectionGrid = () => {
-    return <View>
-        
-    </View>
-}
+  return <View></View>;
+};
+
+export default ImageSelectionGrid;

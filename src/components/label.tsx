@@ -14,10 +14,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     flexDirection: "row",
     padding: 10,
+    justifyContent: "space-between",
   },
   label: {
     fontWeight: "500",
-    marginRight: 6,
+    // marginRight: 6,
   },
 });
 
