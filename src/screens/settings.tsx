@@ -6,6 +6,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Dimensions } from "react-native";
 import { useState } from "react";
 import YoutubeLinkItem from "../components/youtube-link-item";
+import Label from "../components/label";
 
 const linkItems = [
   {
@@ -95,6 +96,7 @@ export default function Settings() {
       <Text h4 style={styles.header}>
         Account
       </Text>
+      <Label label="Name" value="Matt" />
       <Input
         inputStyle={styles.inputStyle}
         placeholder="Email"
