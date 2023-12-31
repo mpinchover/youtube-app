@@ -13,7 +13,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
     flexDirection: "row",
-    padding: 10,
+    // padding: 10,
+    marginVertical: 10,
     justifyContent: "space-between",
   },
   label: {

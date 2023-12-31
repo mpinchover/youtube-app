@@ -11,12 +11,12 @@ const YoutubeLinkItem = ({ title }) => {
   return (
     <View style={styles.container}>
       <View style={styles.youtubeLink}>
-        <AntDesign style={styles.icon} name="youtube" color="red" size={24} />
+        {/* <AntDesign style={styles.icon} name="youtube" color="red" size={24} /> */}
         <Text numberOfLines={1}>{title}</Text>
       </View>
       <Ionicons
         style={styles.remove}
-        name="remove-circle"
+        name="remove-circle-outline"
         size={24}
         color="black"
       />

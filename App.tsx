@@ -13,6 +13,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Screen2 from "./src/screens/settings";
 import { Chat, MessageChat } from "./src/screens/chat";
 import Matching from "./src/screens/matching";
+import AccountProfile from "./src/screens/account-profile";
+import DatingFilters from "./src/screens/dating-filters";
 
 const Tab = createBottomTabNavigator();
 
@@ -101,6 +103,25 @@ export default function App() {
               }}
               name="MessageChat"
               component={MessageChat}
+            />
+
+            <Stack.Screen
+              options={({ route }) => {
+                return {
+                  headerTitle: "Something", // set it through global state
+                };
+              }}
+              name="AccountProfile"
+              component={AccountProfile}
+            />
+            <Stack.Screen
+              options={({ route }) => {
+                return {
+                  headerTitle: "Something", // set it through global state
+                };
+              }}
+              name="DatingFilters"
+              component={DatingFilters}
             />
           </Stack.Group>
         </Stack.Navigator>
