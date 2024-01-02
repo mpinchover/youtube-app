@@ -1,9 +1,20 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
+import { Header, Input, Text, Divider } from "@rneui/themed";
+import { SettingsInputEditable } from "../components/common/inputs";
+import { SettingsHeader } from "../components/common/headers";
 
 const DatingFilters = () => {
   return (
     <View>
-      <Text>Dating filters</Text>
+      <SettingsHeader title="Matching preferences" />
+
+      <SettingsInputEditable label="I'm interested in" value="Women" />
+      <Divider />
+      <SettingsInputEditable label="Min age" value="26" canEdit />
+      <Divider />
+      <SettingsInputEditable label="Max age" value="50" canEdit />
+      {/* <Divider />
+      <SettingsInputEditable label="I identify as" value="Male" /> */}
     </View>
   );
 };
