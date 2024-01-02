@@ -18,6 +18,7 @@ import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import ImageSelectionGrid from "../components/image-selection-grid";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
+import { SettingsHeader } from "../components/common/headers";
 
 const linkItems = [
   {
@@ -144,9 +145,7 @@ export default function Settings({ navigation }) {
         <Label label="Age range" value="29 - 46" />
       </View> */}
       <View style={styles.settingsSection}>
-        <Text h4 style={styles.header}>
-          Images
-        </Text>
+        <SettingsHeader title="Images" />
 
         <ImageSelectionGrid />
       </View>
@@ -196,21 +195,23 @@ export default function Settings({ navigation }) {
         inputContainerStyle={styles.inputContainerStyle}
       /> */}
       <View style={styles.settingsSection}>
-        <Text h4 style={styles.header}>
-          Videos
-        </Text>
+        <SettingsHeader title="Youtube videos" />
 
-        <Button
+        {/* <Button
           onPress={toggleOverlay}
           style={styles.button}
           title="Add Youtube link"
           type="clear"
           buttonStyle={{ marginLeft: 0, paddingLeft: 0 }}
-        />
+        /> */}
         <View style={styles.linksContainer}>
           {linkItems.map((e, i) => {
             return (
-              <ListItem bottomDivider={i < linkItems.length - 1} key={i}>
+              <ListItem
+                containerStyle={{ padding: 0 }}
+                bottomDivider={i < linkItems.length - 1}
+                key={i}
+              >
                 <YoutubeLinkItem title={e.title} />
               </ListItem>
             );
@@ -285,6 +286,6 @@ const styles = StyleSheet.create({
   settingsSection: {
     // marginBottom: 4,
     marginTop: 20,
-    paddingHorizontal: 10,
+    // paddingHorizontal: 10,
   },
 });

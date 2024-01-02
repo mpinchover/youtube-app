@@ -13,8 +13,6 @@ const DatingFilters = () => {
       <SettingsInputEditable label="Min age" value="26" canEdit />
       <Divider />
       <SettingsInputEditable label="Max age" value="50" canEdit />
-      {/* <Divider />
-      <SettingsInputEditable label="I identify as" value="Male" /> */}
     </View>
   );
 };
