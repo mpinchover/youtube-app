@@ -205,7 +205,8 @@ export default function Settings({ navigation }) {
           buttonStyle={{ marginLeft: 0, paddingLeft: 0 }}
         /> */}
         <View style={styles.linksContainer}>
-          {linkItems.map((e, i) => {
+          <ImageSelectionGrid />
+          {/* {linkItems.map((e, i) => {
             return (
               <ListItem
                 containerStyle={{ padding: 0 }}
@@ -215,7 +216,7 @@ export default function Settings({ navigation }) {
                 <YoutubeLinkItem title={e.title} />
               </ListItem>
             );
-          })}
+          })} */}
         </View>
       </View>
     </ScrollView>

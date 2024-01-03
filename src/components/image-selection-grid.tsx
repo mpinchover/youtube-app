@@ -1,5 +1,5 @@
 import { Image } from "@rneui/base";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity} from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
@@ -17,7 +17,7 @@ const ImageInput = () => {
     });
 
     if (result?.assets?.[0]?.uri) {
-      console.log("Found URL");
+      // console.log("Found URL");
       setImage(result.assets[0].uri);
     } else {
       console.log("no url");
