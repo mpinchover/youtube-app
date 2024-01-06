@@ -62,80 +62,15 @@ export default function Settings({ navigation }) {
         <Text style={{ fontSize: 18 }}>Dating filters</Text>
         <AntDesign name="right" size={24} color="black" />
       </TouchableOpacity>
-      {/* </View> */}
-      {/* <View style={styles.settingsSection}>
-        <Text h4 style={styles.header}>
-          Account
-        </Text>
-        <Label label="Name" value="Matt" />
-        <Label label="Email" value="something@gmail.com" />
-        <Label label="Mobile" value="+1-444-444-4242" />
-        <Label label="Date of birth" value="8/31/1994" />
-        <Label label="Gender" value="Male" />
-      </View>
 
-      <View style={styles.settingsSection}>
-        <Text h4 style={styles.header}>
-          Filters
-        </Text>
-
-        <Label label="Gender preference" value="Female" />
-        <Label label="Age range" value="29 - 46" />
-      </View> */}
       <View style={styles.settingsSection}>
         <SettingsHeader title="Images" />
 
         <ImageSelectionGrid />
       </View>
-      {/*
-      <MultiSlider
-        values={multiSliderValue}
-        onValuesChange={multiSliderValuesChange}
-        min={0}
-        max={10}
-        step={1}
-        snapped
-        // minMarkerOverlapDistance={4}
-      /> */}
-
-      {/* <Input
-        inputStyle={styles.inputStyle}
-        placeholder="Email"
-        leftIcon={{
-          type: "material-icons",
-          name: "email",
-          color: "grey",
-          size: 16,
-        }}
-        rightIcon={{
-          type: "ant-design",
-          name: "edit",
-          color: "grey",
-          size: 16,
-        }}
-        inputContainerStyle={styles.inputContainerStyle}
-      />
-      <Input
-        inputStyle={styles.inputStyle}
-        placeholder="Mobile"
-        leftIcon={{
-          type: "material-icons",
-          name: "phone",
-          color: "grey",
-          size: 16,
-        }}
-        rightIcon={{
-          type: "ant-design",
-          name: "edit",
-          color: "grey",
-          size: 16,
-        }}
-        inputContainerStyle={styles.inputContainerStyle}
-      /> */}
       <View style={styles.settingsSection}>
         <SettingsHeader title="Youtube videos" />
-        <YoutubeLinkGrid />
-
+        <YoutubeLinkGrid navigation={navigation} />
       </View>
     </ScrollView>
   );

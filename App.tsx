@@ -15,6 +15,7 @@ import { Chat, MessageChat } from "./src/screens/chat";
 import Matching from "./src/screens/matching";
 import AccountProfile from "./src/screens/account-profile";
 import DatingFilters from "./src/screens/dating-filters";
+import YoutubeVideoSelection from "./src/screens/youtube-video-selection";
 
 const Tab = createBottomTabNavigator();
 
@@ -122,6 +123,15 @@ export default function App() {
               }}
               name="DatingFilters"
               component={DatingFilters}
+            />
+            <Stack.Screen
+              options={({ route }) => {
+                return {
+                  headerTitle: "YoutubeVideoSelection", // set it through global state
+                };
+              }}
+              name="YoutubeVideoSelection"
+              component={YoutubeVideoSelection}
             />
           </Stack.Group>
         </Stack.Navigator>

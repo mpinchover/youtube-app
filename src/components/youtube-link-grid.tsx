@@ -12,33 +12,24 @@ import { AntDesign } from "@expo/vector-icons";
 const image = {
   uri: "https://img.youtube.com/vi/YV64LrneGRE/maxresdefault.jpg",
 };
-// const YoutubeLinkItem = () => {
-//   return (
-//     <View style={styles.container}>
-//       <ImageBackground
-//         source={image}
-//         resizeMode="cover"
-//         style={styles.image}
-//       ></ImageBackground>
-//       <View style={styles.delete}>
-//         <FontAwesome name="remove" size={15} color="black" />
-//       </View>
-//     </View>
-//   );
-// };
 
-const YoutubeInput = () => {
+const YoutubeInput = ({ onPress, idx }) => {
   return (
-    // <TouchableOpacity style={styles.videoContainer}>
-    //   <AntDesign name="youtube" size={24} color="grey" />
-    // </TouchableOpacity>
-    <TouchableOpacity style={styles.videoContainer}>
+    <TouchableOpacity
+      onPress={() => onPress(idx)}
+      style={styles.videoContainer}
+    >
       <AntDesign name="youtube" size={24} color="grey" />
     </TouchableOpacity>
   );
 };
 
-const YoutubeLinkGrid = () => {
+const YoutubeLinkGrid = ({ navigation }) => {
+  const setYoutubeVideoLink = (idx) => {
+    console.log("idx is", idx);
+    navigation.navigate("YoutubeVideoSelection");
+  };
+
   return (
     <View
       style={{
@@ -48,20 +39,15 @@ const YoutubeLinkGrid = () => {
       }}
     >
       <View style={styles.container}>
-        <YoutubeInput />
-        <YoutubeInput />
-        <YoutubeInput />
+        <YoutubeInput idx={1} onPress={setYoutubeVideoLink} />
+        <YoutubeInput idx={2} onPress={setYoutubeVideoLink} />
+        <YoutubeInput idx={3} onPress={setYoutubeVideoLink} />
       </View>
       <View style={styles.container}>
-        <YoutubeInput />
-        <YoutubeInput />
-        <YoutubeInput />
+        <YoutubeInput idx={4} onPress={setYoutubeVideoLink} />
+        <YoutubeInput idx={5} onPress={setYoutubeVideoLink} />
+        <YoutubeInput idx={6} onPress={setYoutubeVideoLink} />
       </View>
-      {/* <View style={styles.container}>
-        <YoutubeInput />
-        <YoutubeInput />
-        <YoutubeInput />
-      </View> */}
     </View>
   );
 };
