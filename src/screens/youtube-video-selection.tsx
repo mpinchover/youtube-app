@@ -5,9 +5,10 @@ const YoutubeVideoSelection = () => {
   return (
     <View style={styles.container}>
       <Input
-        inputContainerStyle={{ padding: 0, margin: 0 }}
+        containerStyle={styles.inputContainer}
+        // inputContainerStyle={{ borderWidth: 1, padding: 0, margin: 0 }}
         style={styles.input}
-        inputStyle={{ padding: 0, margin: 0 }}
+        // inputStyle={{ padding: 0, margin: 0 }}
         placeholder="Youtube video url"
       />
       <Text>YoutubeVideoSelection</Text>
@@ -19,8 +20,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    // alignItems: "center",
-    // justifyContent: "center",
+  },
+  inputContainer: {
+    marginHorizontal: 0,
+    paddingHorizontal: 0,
+    borderWidth: 1,
   },
   input: {
     padding: 0,

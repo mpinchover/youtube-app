@@ -56,7 +56,7 @@ const MainScreens = ({ navigation }) => {
                   color={color}
                 />
               );
-            } else if (route.name === "MessageList") {
+            } else if (route.name === "Chat") {
               icon = <Entypo name="chat" size={24} color={color} />;
             } else {
               icon = <FontAwesome name="snapchat" size={24} color={color} />;
@@ -69,7 +69,7 @@ const MainScreens = ({ navigation }) => {
       }}
     >
       <Tab.Screen name="Matching" component={Matching} />
-      <Tab.Screen name="MessageList" component={Chat} />
+      <Tab.Screen name="Chat" component={Chat} />
       <Tab.Screen name="Settings" component={Screen2} />
     </Tab.Navigator>
   );
