@@ -12,7 +12,7 @@ import {
 import { MaterialIcons } from "@expo/vector-icons";
 import { Dimensions } from "react-native";
 import { useState } from "react";
-import YoutubeLinkItem from "../components/youtube-link-item";
+import YoutubeLinkGrid from "../components/youtube-link-grid";
 import Label from "../components/label";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import ImageSelectionGrid from "../components/image-selection-grid";
@@ -37,72 +37,10 @@ const linkItems = [
   {
     title: "Halo 2: behind the scenes with the studio",
   },
-  {
-    title: "How to grow your own candy",
-  },
-  {
-    title: "Miley Cryus live at the Grand Fox stadium",
-  },
-  {
-    title: "Best deals of 2023 on Amazon",
-  },
-  // {
-  //   title:
-  //     "Blender hacks for Blender 3.2. How to model like a pro and get your work noticed by the top VFX studios",
-  // },
-  // {
-  //   title: "Halo 2: behind the scenes with the studio",
-  // },
-  // {
-  //   title: "How to grow your own candy",
-  // },
-  // {
-  //   title: "Miley Cryus live at the Grand Fox stadium",
-  // },
-  // {
-  //   title: "Best deals of 2023 on Amazon",
-  // },
-  // {
-  //   title:
-  //     "Blender hacks for Blender 3.2. How to model like a pro and get your work noticed by the top VFX studios",
-  // },
-  // {
-  //   title: "Halo 2: behind the scenes with the studio",
-  // },
-  // {
-  //   title: "How to grow your own candy",
-  // },
-  // {
-  //   title: "Miley Cryus live at the Grand Fox stadium",
-  // },
-  // {
-  //   title: "Best deals of 2023 on Amazon",
-  // },
-  // {
-  //   title:
-  //     "Blender hacks for Blender 3.2. How to model like a pro and get your work noticed by the top VFX studios",
-  // },
-  // {
-  //   title: "Halo 2: behind the scenes with the studio",
-  // },
 ];
 export default function Settings({ navigation }) {
   const [visible, setVisible] = useState(true);
   const [multiSliderValue, setMultiSliderValue] = useState([3, 7]);
-
-  const multiSliderValuesChange = (values) => setMultiSliderValue(values);
-
-  const toggleOverlay = () => {
-    setVisible(!visible);
-  };
-
-  const renderItem = ({ item }) => {
-    return (
-      <ListItem>
-        <YoutubeLinkItem title={item.title} />
-      </ListItem>
-    );
-  };
 
   const keyExtractor = (item, index) => index.toString();
 
@@ -196,48 +134,12 @@ export default function Settings({ navigation }) {
       /> */}
       <View style={styles.settingsSection}>
         <SettingsHeader title="Youtube videos" />
+        <YoutubeLinkGrid />
 
-        {/* <Button
-          onPress={toggleOverlay}
-          style={styles.button}
-          title="Add Youtube link"
-          type="clear"
-          buttonStyle={{ marginLeft: 0, paddingLeft: 0 }}
-        /> */}
-        <View style={styles.linksContainer}>
-          <ImageSelectionGrid />
-          {/* {linkItems.map((e, i) => {
-            return (
-              <ListItem
-                containerStyle={{ padding: 0 }}
-                bottomDivider={i < linkItems.length - 1}
-                key={i}
-              >
-                <YoutubeLinkItem title={e.title} />
-              </ListItem>
-            );
-          })} */}
-        </View>
       </View>
     </ScrollView>
   );
 }
-
-/*
-     {/* <Overlay
-        style={styles.overlay}
-        isVisible={visible}
-        onBackdropPress={toggleOverlay}
-      >
-        <Input
-          placeholder="Add youtube link"
-          leftIcon={{ type: "ant-design", name: "youtube", color: "grey" }}
-          inputContainerStyle={styles.inputContainerStyle}
-        />
-        <Text style={styles.overlay}>Hello!</Text>
-        {/* <Button type="clear" title="Add link" onPress={toggleOverlay} /> }
-      </Overlay>
-       */
 
 const styles = StyleSheet.create({
   header: {
