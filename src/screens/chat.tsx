@@ -35,6 +35,10 @@ export function Chat(props) {
 
   const { navigation } = props;
 
+  const onPressChatPreview = () => {
+    navigation.navigate("MessageChat");
+  };
+
   return (
     <View style={styles.container}>
       {chatItems.map((e, i) => {
@@ -44,7 +48,7 @@ export function Chat(props) {
             bottomDivider={i < chatItems.length - 1}
             key={i}
           >
-            <ChatPreview />
+            <ChatPreview onPressChatPreview={onPressChatPreview} />
           </ListItem>
         );
       })}
