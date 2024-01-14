@@ -1,5 +1,14 @@
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import { Image } from "expo-image";
+import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 import Carousel from "react-native-reanimated-carousel";
 
 const images = [
@@ -16,6 +25,21 @@ const images = [
     uri: "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
   },
 ];
+
+const YoutubeItem = ({ title }) => {
+  return (
+    <TouchableOpacity style={styles.youtubeItem}>
+      <AntDesign
+        style={{ marginRight: 5 }}
+        name="youtube"
+        size={24}
+        color="black"
+      />
+      <Text style={{ fontSize: 16 }}>{title}</Text>
+    </TouchableOpacity>
+  );
+};
+
 const ProfilePreview = () => {
   return (
     <View style={styles.container}>
@@ -23,7 +47,8 @@ const ProfilePreview = () => {
         <Carousel
           loop
           height={Dimensions.get("window").height / 2}
-          width={Dimensions.get("window").width}
+          width={Dimensions.get("window").width - 20}
+          // width
           data={images}
           mode={"parallax"}
           renderItem={({ item }) => {
@@ -38,7 +63,30 @@ const ProfilePreview = () => {
         />
       </View>
       <View>
-        <Text>Daniel Mulberry</Text>
+        <View style={styles.nameAgeContainer}>
+          <Text style={styles.name}>Daniel Mulberry, </Text>
+          <Text style={styles.age}>34</Text>
+        </View>
+        <View>
+          <YoutubeItem title="Why grass is green " />
+          <YoutubeItem title="Why grass is green " />
+          <YoutubeItem title="Why grass is green " />
+        </View>
+        {/* <Text>Daniel's similar videos</Text> */}
+      </View>
+      <View style={[styles.buttonGroup]}>
+        <TouchableOpacity
+          style={[styles.button, { borderWidth: 1, borderColor: "red" }]}
+        >
+          <FontAwesome name="remove" size={16} color="red" />
+          <Text style={{ color: "red" }}>No</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, { borderWidth: 1, borderColor: "green" }]}
+        >
+          <Entypo name="check" size={16} color="green" />
+          <Text style={{ color: "green" }}>Yes</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -46,9 +94,52 @@ const ProfilePreview = () => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 10,
+    flex: 1,
+    position: "relative",
   },
-  profileImages: {},
+  button: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderRadius: 4,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    justifyContent: "center",
+    columnGap: 4,
+  },
+  buttonGroup: {
+    // borderWidth: 1,
+    columnGap: 20,
+    position: "absolute",
+    bottom: "6%",
+    // left: "50%",
+    width: Dimensions.get("window").width,
+    justifyContent: "center",
+    // transform: [{ translateX: -Dimensions.get("window").width * 0.5 }],
+    flexDirection: "row",
+  },
+  youtubeItem: {
+    flexDirection: "row",
+    paddingHorizontal: 10,
+    alignItems: "center",
+  },
+  nameAgeContainer: {
+    flexDirection: "row",
+    paddingHorizontal: 10,
+    marginBottom: 4,
+    // justifyContent: "space-between",
+  },
+  name: {
+    fontSize: 18,
+    fontWeight: "500",
+  },
+  age: {
+    fontSize: 18,
+  },
+  profileImages: {
+    paddingHorizontal: 10,
+    // paddingLeft: 5,
+  },
   image: {
     flex: 1,
   },
