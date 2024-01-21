@@ -64,7 +64,7 @@ const MainScreens = ({ navigation }) => {
             return icon;
           },
           headerShown: false,
-          tabBarShowLabel: false,
+          // tabBarShowLabel: false,
         };
       }}
     >

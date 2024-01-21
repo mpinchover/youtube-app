@@ -69,6 +69,13 @@ const Matching = () => {
       </View>
     );
   }
+  if (candidateProfiles.length === 0) {
+    return (
+      <View style={styles.container}>
+        <Text>No candidates to show</Text>
+      </View>
+    );
+  }
   return (
     <View style={styles.container}>
       <Animated.View

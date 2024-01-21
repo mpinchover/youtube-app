@@ -113,6 +113,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     columnGap: 4,
     backgroundColor: "white",
+    width: 100,
   },
   buttonGroup: {
     columnGap: 20,
