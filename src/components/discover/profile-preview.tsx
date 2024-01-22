@@ -5,7 +5,7 @@ import {
   // Text,
   TouchableOpacity,
 } from "react-native";
-import { Text } from "@rneui/themed";
+import { ListItem, Text } from "@rneui/themed";
 import { Image } from "expo-image";
 import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
@@ -27,6 +27,8 @@ const images = [
   },
 ];
 
+const youtubeItems = [{}, {}, {}];
+
 const YoutubeItem = ({ title }) => {
   return (
     <TouchableOpacity style={styles.youtubeItem}>
@@ -47,7 +49,7 @@ const ProfilePreview = ({ next }) => {
       <View style={styles.profileImages}>
         <Carousel
           loop
-          height={Dimensions.get("window").height * 0.5}
+          height={Dimensions.get("window").height * 0.4}
           width={Dimensions.get("window").width}
           // width
           data={images}
@@ -73,9 +75,16 @@ const ProfilePreview = ({ next }) => {
         </View>
 
         <View>
-          <YoutubeItem title="Why grass is green " />
-          <YoutubeItem title="Why grass is green " />
-          <YoutubeItem title="Why grass is green " />
+          {youtubeItems.map((e, i) => {
+            return (
+              <ListItem
+                bottomDivider={i < youtubeItems.length - 1}
+                containerStyle={{ padding: 0, paddingVertical: 10 }}
+              >
+                <YoutubeItem title="Why grass is green " />
+              </ListItem>
+            );
+          })}
         </View>
       </View>
       <View style={[styles.buttonGroup]}>
@@ -132,8 +141,8 @@ const styles = StyleSheet.create({
   nameAgeContainer: {
     flexDirection: "row",
     paddingHorizontal: 10,
-    bottom: 5,
-    left: 5,
+    bottom: 10,
+    left: 10,
     position: "absolute",
     backgroundColor: "rgba(255, 255, 255, 0.6)",
     padding: 5,
