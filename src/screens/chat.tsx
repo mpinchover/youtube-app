@@ -10,22 +10,14 @@ import {
   useRecoilValue,
 } from "recoil";
 import { textState } from "../recoil/test/test";
-
+import { ListItem } from "@rneui/themed";
 import { useState } from "react";
 import { Link } from "expo-router";
-const Stack = createStackNavigator();
+import ChatPreview from "../components/chat-preview";
 
-const MessageList = (props) => {
-  const showMessageScreen = props.route.params.showMessageScreen;
-  return (
-    <View style={styles.container}>
-      <Text>Message List</Text>
-      <StatusBar style="auto" />
-      {/* <Button title="Click me" onPress={() => navigation.navigate("MessageChat")} /> */}
-      <Button title="Click me" onPress={() => showMessageScreen()} />
-    </View>
-  );
-};
+const chatItems = [{}, {}, {}, {}];
+
+const Stack = createStackNavigator();
 
 export const MessageChat = ({ navigation, route }) => {
   useState(() => {});
@@ -43,9 +35,25 @@ export function Chat(props) {
 
   const { navigation } = props;
 
+  const onPressChatPreview = () => {
+    navigation.navigate("MessageChat");
+  };
+
   return (
     <View style={styles.container}>
-      <Text>Message List</Text>
+      {chatItems.map((e, i) => {
+        return (
+          <ListItem
+            containerStyle={{ padding: 0, margin: 0 }}
+            bottomDivider={i < chatItems.length - 1}
+            key={i}
+          >
+            <ChatPreview onPressChatPreview={onPressChatPreview} />
+          </ListItem>
+        );
+      })}
+
+      {/* <Text>Message List</Text>
       <StatusBar style="auto" />
       <Text>{text}</Text>
       <Button
@@ -55,7 +63,7 @@ export function Chat(props) {
       <Button
         title="Click me to set text"
         onPress={() => setText("New text state")}
-      />
+      /> */}
     </View>
   );
 }
@@ -64,7 +72,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    // alignItems: "center",
+    // justifyContent: "center",
   },
 });
