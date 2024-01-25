@@ -79,6 +79,7 @@ const ProfilePreview = ({ next }) => {
             return (
               <ListItem
                 bottomDivider={i < youtubeItems.length - 1}
+                key={i}
                 containerStyle={{ padding: 0, paddingVertical: 10 }}
               >
                 <YoutubeItem title="Why grass is green " />
