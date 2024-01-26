@@ -36,9 +36,9 @@ const YoutubeItem = ({ title }) => {
         style={{ marginRight: 5 }}
         name="youtube"
         size={24}
-        color="black"
+        color="red"
       />
-      <Text style={{ fontSize: 16 }}>{title}</Text>
+      <Text style={{ fontSize: 14 }}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -71,7 +71,9 @@ const ProfilePreview = ({ next }) => {
       </View>
       <View>
         <View style={styles.infoHeader}>
-          <Text h4>Similar videos Danielle liked</Text>
+          <Text style={styles.infoHeaderText}>
+            Similar videos Danielle liked
+          </Text>
         </View>
 
         <View>
@@ -91,10 +93,10 @@ const ProfilePreview = ({ next }) => {
       <View style={[styles.buttonGroup]}>
         <TouchableOpacity
           onPress={next}
-          style={[styles.button, { borderWidth: 1, borderColor: "red" }]}
+          style={[styles.button, { borderWidth: 1, borderColor: "grey" }]}
         >
-          <FontAwesome name="remove" size={16} color="red" />
-          <Text style={{ color: "red" }}>No</Text>
+          <FontAwesome name="remove" size={16} color="grey" />
+          <Text style={{ color: "grey" }}>No</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={next}
@@ -149,11 +151,11 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   name: {
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: "500",
   },
   age: {
-    fontSize: 18,
+    fontSize: 14,
   },
   profileImages: {
     marginBottom: 10,
@@ -164,6 +166,10 @@ const styles = StyleSheet.create({
   infoHeader: {
     marginBottom: 4,
     paddingHorizontal: 10,
+  },
+  infoHeaderText: {
+    fontSize: 16,
+    fontWeight: "700",
   },
 });
 

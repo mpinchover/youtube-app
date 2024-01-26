@@ -24,9 +24,9 @@ const YoutubeInput = ({ onPress, idx }) => {
   );
 };
 
-const YoutubeLinkGrid = ({ navigation }) => {
+const YoutubeLinkGrid = ({ navigation, selectVideoForUpload }) => {
   const setYoutubeVideoLink = (idx) => {
-    console.log("idx is", idx);
+    // console.log("idx is", idx);
     navigation.navigate("YoutubeVideoSelection");
   };
 
@@ -39,14 +39,14 @@ const YoutubeLinkGrid = ({ navigation }) => {
       }}
     >
       <View style={styles.container}>
-        <YoutubeInput idx={1} onPress={setYoutubeVideoLink} />
-        <YoutubeInput idx={2} onPress={setYoutubeVideoLink} />
-        <YoutubeInput idx={3} onPress={setYoutubeVideoLink} />
+        <YoutubeInput idx={1} onPress={selectVideoForUpload} />
+        <YoutubeInput idx={2} onPress={selectVideoForUpload} />
+        <YoutubeInput idx={3} onPress={selectVideoForUpload} />
       </View>
       <View style={styles.container}>
-        <YoutubeInput idx={4} onPress={setYoutubeVideoLink} />
-        <YoutubeInput idx={5} onPress={setYoutubeVideoLink} />
-        <YoutubeInput idx={6} onPress={setYoutubeVideoLink} />
+        <YoutubeInput idx={4} onPress={selectVideoForUpload} />
+        <YoutubeInput idx={5} onPress={selectVideoForUpload} />
+        <YoutubeInput idx={6} onPress={selectVideoForUpload} />
       </View>
     </View>
   );

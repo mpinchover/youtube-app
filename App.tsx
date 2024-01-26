@@ -12,7 +12,7 @@ import { RecoilRoot } from "recoil";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Screen2 from "./src/screens/settings";
-import { Chat as ChatScreen, MessageChat } from "./src/screens/chat";
+import { MessageChat } from "./src/screens/chat";
 import Matching from "./src/screens/matching";
 import AccountProfile from "./src/screens/account-profile";
 import DatingFilters from "./src/screens/dating-filters";
@@ -48,11 +48,15 @@ const sort = {
 const ChannelScreen = (props) => {
   const { channel } = useAppContext();
   return (
-    // @ts-ignore
-    <Channel channel={channel}>
-      <MessageList />
-      <MessageInput />
-    </Channel>
+    <OverlayProvider>
+      <Chat client={chatClient}>
+        {/* @ts-ignore */}
+        <Channel channel={channel}>
+          <MessageList />
+          <MessageInput />
+        </Channel>
+      </Chat>
+    </OverlayProvider>
   );
   return null;
 };
@@ -64,17 +68,21 @@ const ChannelListScreen = (props) => {
   const { setChannel } = useAppContext();
 
   return (
-    <ChannelList
-      // @ts-ignore
-      filters={filters}
-      // @ts-ignore
-      sort={sort}
-      onSelect={(channel) => {
-        const { navigation } = props;
-        setChannel(channel);
-        navigation.navigate("ChannelScreen");
-      }}
-    />
+    <OverlayProvider>
+      <Chat client={chatClient}>
+        <ChannelList
+          // @ts-ignore
+          filters={filters}
+          // @ts-ignore
+          sort={sort}
+          onSelect={(channel) => {
+            const { navigation } = props;
+            setChannel(channel);
+            navigation.navigate("ChannelScreen");
+          }}
+        />
+      </Chat>
+    </OverlayProvider>
   );
 };
 
@@ -113,7 +121,7 @@ const MainScreens = ({ navigation }) => {
                   color={color}
                 />
               );
-            } else if (route.name === "Chat") {
+            } else if (route.name === "ChannelListScreen") {
               icon = <Entypo name="chat" size={24} color={color} />;
             } else {
               icon = <FontAwesome name="snapchat" size={24} color={color} />;
@@ -126,9 +134,8 @@ const MainScreens = ({ navigation }) => {
       }}
     >
       <Tab.Screen name="Matching" component={Matching} />
-      <Tab.Screen name="Chat" component={ChatScreen} />
+      <Tab.Screen name="ChannelListScreen" component={ChannelListScreen} />
       <Tab.Screen name="Settings" component={Screen2} />
-      <Tab.Screen name="chat-test" component={ChannelListScreen} />
     </Tab.Navigator>
   );
 };
@@ -139,6 +146,74 @@ console.log(chatApiKey);
 // @ts-ignore
 const chatClient = StreamChat.getInstance(chatApiKey);
 
+const MainNavigationStack = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Group
+          screenOptions={({ navigation, route }) => {
+            return {
+              headerTitle: getHeaderTitle(route),
+            };
+          }}
+        >
+          <Stack.Screen
+            options={({ route }) => {
+              return {
+                headerTitle: getHeaderTitle(route),
+              };
+            }}
+            name="MainScreens"
+            component={MainScreens}
+          />
+          <Stack.Screen
+            options={({ route }) => {
+              return {
+                headerTitle: "Something", // set it through global state
+              };
+            }}
+            name="MessageChat"
+            component={MessageChat}
+          />
+
+          <Stack.Screen
+            options={({ route }) => {
+              return {
+                headerTitle: "Something", // set it through global state
+              };
+            }}
+            name="AccountProfile"
+            component={AccountProfile}
+          />
+          <Stack.Screen
+            options={({ route }) => {
+              return {
+                headerTitle: "Something", // set it through global state
+              };
+            }}
+            name="DatingFilters"
+            component={DatingFilters}
+          />
+          <Stack.Screen
+            options={({ route }) => {
+              return {
+                headerTitle: "YoutubeVideoSelection", // set it through global state
+              };
+            }}
+            name="YoutubeVideoSelection"
+            component={YoutubeVideoSelection}
+          />
+          <Stack.Screen
+            name="ChannelListScreen"
+            component={ChannelListScreen}
+          />
+          <Stack.Screen name="ChannelScreen" component={ChannelScreen} />
+        </Stack.Group>
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
 export default function App() {
   const { clientIsReady } = useChatClient();
 
@@ -147,76 +222,7 @@ export default function App() {
       <GestureHandlerRootView style={{ flex: 1 }}>
         <SafeAreaView style={{ flex: 1 }}>
           <RecoilRoot>
-            <NavigationContainer>
-              <OverlayProvider>
-                <Chat client={chatClient}>
-                  <Stack.Navigator>
-                    <Stack.Group
-                      screenOptions={({ navigation, route }) => {
-                        return {
-                          headerTitle: getHeaderTitle(route),
-                        };
-                      }}
-                    >
-                      <Stack.Screen
-                        options={({ route }) => {
-                          return {
-                            headerTitle: getHeaderTitle(route),
-                          };
-                        }}
-                        name="MainScreens"
-                        component={MainScreens}
-                      />
-                      <Stack.Screen
-                        options={({ route }) => {
-                          return {
-                            headerTitle: "Something", // set it through global state
-                          };
-                        }}
-                        name="MessageChat"
-                        component={MessageChat}
-                      />
-
-                      <Stack.Screen
-                        options={({ route }) => {
-                          return {
-                            headerTitle: "Something", // set it through global state
-                          };
-                        }}
-                        name="AccountProfile"
-                        component={AccountProfile}
-                      />
-                      <Stack.Screen
-                        options={({ route }) => {
-                          return {
-                            headerTitle: "Something", // set it through global state
-                          };
-                        }}
-                        name="DatingFilters"
-                        component={DatingFilters}
-                      />
-                      <Stack.Screen
-                        options={({ route }) => {
-                          return {
-                            headerTitle: "YoutubeVideoSelection", // set it through global state
-                          };
-                        }}
-                        name="YoutubeVideoSelection"
-                        component={YoutubeVideoSelection}
-                      />
-                      <Stack.Screen
-                        name="ChannelListScreen"
-                        component={ChannelListScreen}
-                      />
-                      <Stack.Screen
-                        name="ChannelScreen"
-                        component={ChannelScreen}
-                      />
-                    </Stack.Group>
-                  </Stack.Navigator>
-                </Chat>
-              </OverlayProvider>
-            </NavigationContainer>
+            <MainNavigationStack />
           </RecoilRoot>
         </SafeAreaView>
       </GestureHandlerRootView>

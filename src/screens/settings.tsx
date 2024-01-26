@@ -8,6 +8,7 @@ import {
   Slider,
   ListItem,
   Divider,
+  Overlay,
 } from "@rneui/themed";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Dimensions } from "react-native";
@@ -41,8 +42,35 @@ const linkItems = [
 export default function Settings({ navigation }) {
   const [visible, setVisible] = useState(true);
   const [multiSliderValue, setMultiSliderValue] = useState([3, 7]);
+  const [youtubeUrl, setYoutubeUrl] = useState("");
+  const [youtubeUploadError, setYoutubeUploadError] = useState("");
+  const [isUploadingYoutubeUrl, setIsUploadingYoutubeUrl] = useState(false);
+
+  const toggleOverlay = () => {
+    setVisible(!visible);
+    setYoutubeUrl("");
+  };
 
   const keyExtractor = (item, index) => index.toString();
+
+  const selectVideoForUpload = () => {
+    toggleOverlay();
+  };
+
+  const handleUploadYoutubeUrl = () => {
+    if (!validateYoutubeUrl(youtubeUrl)) {
+      console.log("failed validation");
+      setYoutubeUploadError("this youtube url doesn't look right, try again");
+      return;
+    }
+    console.log("passed validation");
+    setIsUploadingYoutubeUrl(true);
+  };
+
+  function validateYoutubeUrl(url) {
+    const regex = /^https:\/\/www\.youtube\.com+$/;
+    return regex.test(url.toLowerCase());
+  }
 
   return (
     <ScrollView style={styles.container}>
@@ -51,7 +79,7 @@ export default function Settings({ navigation }) {
         onPress={() => navigation.navigate("AccountProfile")}
         style={styles.settingsTab}
       >
-        <Text style={{ fontSize: 18 }}>Account</Text>
+        <Text style={{ fontSize: 16 }}>Account</Text>
         <AntDesign name="right" size={24} color="black" />
       </TouchableOpacity>
       <Divider />
@@ -59,7 +87,7 @@ export default function Settings({ navigation }) {
         onPress={() => navigation.navigate("DatingFilters")}
         style={styles.settingsTab}
       >
-        <Text style={{ fontSize: 18 }}>Dating filters</Text>
+        <Text style={{ fontSize: 16 }}>Dating filters</Text>
         <AntDesign name="right" size={24} color="black" />
       </TouchableOpacity>
 
@@ -70,8 +98,63 @@ export default function Settings({ navigation }) {
       </View>
       <View style={styles.settingsSection}>
         <SettingsHeader title="Youtube videos" />
-        <YoutubeLinkGrid navigation={navigation} />
+        <YoutubeLinkGrid
+          selectVideoForUpload={selectVideoForUpload}
+          navigation={navigation}
+        />
       </View>
+      <Overlay
+        overlayStyle={{
+          // width: "100%",
+          // marginHorizontal: 100,
+          width: Dimensions.get("window").width - 20,
+          padding: 10,
+          paddingVertical: 40,
+        }}
+        isVisible={visible}
+        onBackdropPress={toggleOverlay}
+      >
+        <Text
+          style={{
+            fontSize: 16,
+            fontWeight: "700",
+            // marginBottom: 10,
+          }}
+        >
+          Paste a youtube video url to upload
+        </Text>
+        <Input
+          autoCapitalize="none"
+          autoCorrect={false}
+          value={youtubeUrl}
+          onChangeText={(text) => {
+            setYoutubeUploadError("");
+            setYoutubeUrl(text);
+          }}
+          inputStyle={{
+            fontSize: 14,
+          }}
+          containerStyle={{
+            width: "auto",
+            margin: 0,
+            padding: 0,
+            paddingHorizontal: 0,
+          }}
+          style={{
+            margin: 0,
+            padding: 0,
+            paddingHorizontal: 0,
+          }}
+          placeholder="Enter youtube url"
+        />
+        {/* <Text>Hello from Overlay!</Text> */}
+        <Text>{youtubeUploadError}</Text>
+        <Button
+          style={{ marginTop: 10 }}
+          onPress={handleUploadYoutubeUrl}
+          title="Upload"
+        ></Button>
+      </Overlay>
     </ScrollView>
   );
 }
@@ -91,10 +174,10 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     // marginBottom: 10,
   },
-  overlay: {
-    width: Dimensions.get("window").width - 1000,
-    justifyContent: "flex-start",
-  },
+  // overlay: {
+  //   width: Dimensions.get("window").width - 1000,
+  //   justifyContent: "flex-start",
+  // },
   inputStyle: {
     fontSize: 14,
   },
