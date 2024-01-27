@@ -8,6 +8,7 @@ import {
   Slider,
   ListItem,
   Divider,
+  Overlay,
 } from "@rneui/themed";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Dimensions } from "react-native";
@@ -19,6 +20,8 @@ import ImageSelectionGrid from "../components/image-selection-grid";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
 import { SettingsHeader } from "../components/common/headers";
+import axios from "axios";
+import UploadYoutubeDialogBox from "../components/upload-youtube-dialog-box";
 
 const linkItems = [
   {
@@ -39,10 +42,51 @@ const linkItems = [
   },
 ];
 export default function Settings({ navigation }) {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   const [multiSliderValue, setMultiSliderValue] = useState([3, 7]);
+  const [youtubeUrl, setYoutubeUrl] = useState("");
+  const [youtubeUploadError, setYoutubeUploadError] = useState("");
+  const [isUploadingYoutubeUrl, setIsUploadingYoutubeUrl] = useState(false);
+  // const [youtubeBackgrounds, setYoutubeBackgrounds] = useState({});
 
-  const keyExtractor = (item, index) => index.toString();
+  // const toggleOverlay = () => {
+  //   setVisible(!visible);
+  //   setYoutubeUrl("");
+  // };
+
+  // const selectVideoForUpload = () => {
+  //   toggleOverlay();
+  // };
+
+  // const handleUploadYoutubeUrl = async (youtubeURL, idx) => {
+  //   if (!validateYoutubeUrl(youtubeURL)) {
+  //     setYoutubeUploadError("This youtube url doesn't look right, try again");
+  //     return;
+  //   }
+  //   setIsUploadingYoutubeUrl(true);
+
+  //   try {
+  //     for (let i = 0; i < 30; i++) {
+  //       await axios.get("https://jsonplaceholder.typicode.com/comments");
+  //     }
+  //     setYoutubeBackgrounds((prev) => {
+  //       return {
+  //         ...prev,
+  //         idx: youtubeURL,
+  //       };
+  //     });
+  //   } catch (e) {
+  //     console.log(e);
+  //   } finally {
+  //     setIsUploadingYoutubeUrl(false);
+  //   }
+  // };
+
+  // function validateYoutubeUrl(url) {
+  //   // const regex = /^https:\/\/www\.youtube\.com(\/.*)?$/;
+  //   // return regex.test(url.toLowerCase());
+  //   return url.toLowerCase().startsWith("https://www.youtube.com");
+  // }
 
   return (
     <ScrollView style={styles.container}>
@@ -51,7 +95,7 @@ export default function Settings({ navigation }) {
         onPress={() => navigation.navigate("AccountProfile")}
         style={styles.settingsTab}
       >
-        <Text style={{ fontSize: 18 }}>Account</Text>
+        <Text style={{ fontSize: 16 }}>Account</Text>
         <AntDesign name="right" size={24} color="black" />
       </TouchableOpacity>
       <Divider />
@@ -59,7 +103,7 @@ export default function Settings({ navigation }) {
         onPress={() => navigation.navigate("DatingFilters")}
         style={styles.settingsTab}
       >
-        <Text style={{ fontSize: 18 }}>Dating filters</Text>
+        <Text style={{ fontSize: 16 }}>Dating filters</Text>
         <AntDesign name="right" size={24} color="black" />
       </TouchableOpacity>
 
@@ -70,8 +114,30 @@ export default function Settings({ navigation }) {
       </View>
       <View style={styles.settingsSection}>
         <SettingsHeader title="Youtube videos" />
-        <YoutubeLinkGrid navigation={navigation} />
+        <YoutubeLinkGrid
+        // youtubeBackgrounds={youtubeBackgrounds}
+        // selectVideoForUpload={selectVideoForUpload}
+        // navigation={navigation}
+        />
       </View>
+      {/* <Overlay
+        overlayStyle={{
+          // width: "100%",
+          // marginHorizontal: 100,
+          width: Dimensions.get("window").width - 20,
+          height: Dimensions.get("window").height / 3,
+          justifyContent: "center",
+        }}
+        isVisible={visible}
+        onBackdropPress={toggleOverlay}
+      >
+        <UploadYoutubeDialogBox
+          isUploadingYoutubeUrl={isUploadingYoutubeUrl}
+          setYoutubeUploadError={setYoutubeUploadError}
+          handleUploadYoutubeUrl={handleUploadYoutubeUrl}
+          youtubeUploadError={youtubeUploadError}
+        />
+      </Overlay> */}
     </ScrollView>
   );
 }
@@ -91,10 +157,10 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     // marginBottom: 10,
   },
-  overlay: {
-    width: Dimensions.get("window").width - 1000,
-    justifyContent: "flex-start",
-  },
+  // overlay: {
+  //   width: Dimensions.get("window").width - 1000,
+  //   justifyContent: "flex-start",
+  // },
   inputStyle: {
     fontSize: 14,
   },
