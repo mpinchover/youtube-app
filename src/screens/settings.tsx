@@ -20,6 +20,8 @@ import ImageSelectionGrid from "../components/image-selection-grid";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
 import { SettingsHeader } from "../components/common/headers";
+import axios from "axios";
+import UploadYoutubeDialogBox from "../components/upload-youtube-dialog-box";
 
 const linkItems = [
   {
@@ -40,37 +42,51 @@ const linkItems = [
   },
 ];
 export default function Settings({ navigation }) {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   const [multiSliderValue, setMultiSliderValue] = useState([3, 7]);
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [youtubeUploadError, setYoutubeUploadError] = useState("");
   const [isUploadingYoutubeUrl, setIsUploadingYoutubeUrl] = useState(false);
+  // const [youtubeBackgrounds, setYoutubeBackgrounds] = useState({});
 
-  const toggleOverlay = () => {
-    setVisible(!visible);
-    setYoutubeUrl("");
-  };
+  // const toggleOverlay = () => {
+  //   setVisible(!visible);
+  //   setYoutubeUrl("");
+  // };
 
-  const keyExtractor = (item, index) => index.toString();
+  // const selectVideoForUpload = () => {
+  //   toggleOverlay();
+  // };
 
-  const selectVideoForUpload = () => {
-    toggleOverlay();
-  };
+  // const handleUploadYoutubeUrl = async (youtubeURL, idx) => {
+  //   if (!validateYoutubeUrl(youtubeURL)) {
+  //     setYoutubeUploadError("This youtube url doesn't look right, try again");
+  //     return;
+  //   }
+  //   setIsUploadingYoutubeUrl(true);
 
-  const handleUploadYoutubeUrl = () => {
-    if (!validateYoutubeUrl(youtubeUrl)) {
-      console.log("failed validation");
-      setYoutubeUploadError("this youtube url doesn't look right, try again");
-      return;
-    }
-    console.log("passed validation");
-    setIsUploadingYoutubeUrl(true);
-  };
+  //   try {
+  //     for (let i = 0; i < 30; i++) {
+  //       await axios.get("https://jsonplaceholder.typicode.com/comments");
+  //     }
+  //     setYoutubeBackgrounds((prev) => {
+  //       return {
+  //         ...prev,
+  //         idx: youtubeURL,
+  //       };
+  //     });
+  //   } catch (e) {
+  //     console.log(e);
+  //   } finally {
+  //     setIsUploadingYoutubeUrl(false);
+  //   }
+  // };
 
-  function validateYoutubeUrl(url) {
-    const regex = /^https:\/\/www\.youtube\.com+$/;
-    return regex.test(url.toLowerCase());
-  }
+  // function validateYoutubeUrl(url) {
+  //   // const regex = /^https:\/\/www\.youtube\.com(\/.*)?$/;
+  //   // return regex.test(url.toLowerCase());
+  //   return url.toLowerCase().startsWith("https://www.youtube.com");
+  // }
 
   return (
     <ScrollView style={styles.container}>
@@ -99,62 +115,29 @@ export default function Settings({ navigation }) {
       <View style={styles.settingsSection}>
         <SettingsHeader title="Youtube videos" />
         <YoutubeLinkGrid
-          selectVideoForUpload={selectVideoForUpload}
-          navigation={navigation}
+        // youtubeBackgrounds={youtubeBackgrounds}
+        // selectVideoForUpload={selectVideoForUpload}
+        // navigation={navigation}
         />
       </View>
-      <Overlay
+      {/* <Overlay
         overlayStyle={{
           // width: "100%",
           // marginHorizontal: 100,
           width: Dimensions.get("window").width - 20,
-          padding: 10,
-          paddingVertical: 40,
+          height: Dimensions.get("window").height / 3,
+          justifyContent: "center",
         }}
         isVisible={visible}
         onBackdropPress={toggleOverlay}
       >
-        <Text
-          style={{
-            fontSize: 16,
-            fontWeight: "700",
-            // marginBottom: 10,
-          }}
-        >
-          Paste a youtube video url to upload
-        </Text>
-        <Input
-          autoCapitalize="none"
-          autoCorrect={false}
-          value={youtubeUrl}
-          onChangeText={(text) => {
-            setYoutubeUploadError("");
-            setYoutubeUrl(text);
-          }}
-          inputStyle={{
-            fontSize: 14,
-          }}
-          containerStyle={{
-            width: "auto",
-            margin: 0,
-            padding: 0,
-            paddingHorizontal: 0,
-          }}
-          style={{
-            margin: 0,
-            padding: 0,
-            paddingHorizontal: 0,
-          }}
-          placeholder="Enter youtube url"
+        <UploadYoutubeDialogBox
+          isUploadingYoutubeUrl={isUploadingYoutubeUrl}
+          setYoutubeUploadError={setYoutubeUploadError}
+          handleUploadYoutubeUrl={handleUploadYoutubeUrl}
+          youtubeUploadError={youtubeUploadError}
         />
-        {/* <Text>Hello from Overlay!</Text> */}
-        <Text>{youtubeUploadError}</Text>
-        <Button
-          style={{ marginTop: 10 }}
-          onPress={handleUploadYoutubeUrl}
-          title="Upload"
-        ></Button>
-      </Overlay>
+      </Overlay> */}
     </ScrollView>
   );
 }
