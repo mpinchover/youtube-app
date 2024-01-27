@@ -65,14 +65,20 @@ const Matching = () => {
     return (
       <View style={styles.container}>
         <ActivityIndicator />
-        <Text>Loading candidates</Text>
+        <Text
+          style={{
+            marginTop: 10,
+          }}
+        >
+          Loading profiles
+        </Text>
       </View>
     );
   }
   if (candidateProfiles.length === 0) {
     return (
       <View style={styles.container}>
-        <Text>No candidates to show</Text>
+        <Text>No profiles to show</Text>
       </View>
     );
   }

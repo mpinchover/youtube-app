@@ -133,6 +133,9 @@ const MainScreens = ({ navigation }) => {
             return icon;
           },
           headerShown: false,
+          tabBarActiveTintColor: "black",
+          tabBarInactiveTintColor: "gray",
+
           // tabBarShowLabel: false,
         };
       }}
@@ -146,9 +149,6 @@ const MainScreens = ({ navigation }) => {
   );
 };
 
-// build
-console.log("The chat KEY IS");
-console.log(chatApiKey);
 // @ts-ignore
 const chatClient = StreamChat.getInstance(chatApiKey);
 
@@ -165,8 +165,14 @@ const MainNavigationStack = () => {
         >
           <Stack.Screen
             options={({ route }) => {
+              let focusedRoute = getHeaderTitle(route);
+              if (focusedRoute == "Liked") {
+                focusedRoute = "Liked you";
+              } else if (focusedRoute === "ChannelListScreen") {
+                focusedRoute = "Messages";
+              }
               return {
-                headerTitle: getHeaderTitle(route),
+                headerTitle: focusedRoute,
               };
             }}
             name="MainScreens"
@@ -185,7 +191,7 @@ const MainNavigationStack = () => {
           <Stack.Screen
             options={({ route }) => {
               return {
-                headerTitle: "Something", // set it through global state
+                headerTitle: "Profile", // set it through global state
               };
             }}
             name="AccountProfile"
@@ -194,7 +200,7 @@ const MainNavigationStack = () => {
           <Stack.Screen
             options={({ route }) => {
               return {
-                headerTitle: "Something", // set it through global state
+                headerTitle: "Dating filters", // set it through global state
               };
             }}
             name="DatingFilters"

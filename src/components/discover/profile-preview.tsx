@@ -11,34 +11,60 @@ import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import Carousel from "react-native-reanimated-carousel";
+import * as Linking from "expo-linking";
 
 const images = [
   {
-    uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWomPds9w5emH_C6RY8xF7KRCJe6I5zwVsuw&usqp=CAU",
+    uri: "https://m.media-amazon.com/images/M/MV5BZGM0YjhkZmEtNGYxYy00OTk0LThlNDgtNGQzM2YwNjU0NDQzXkEyXkFqcGdeQXVyMTU3ODQxNDYz._V1_.jpg",
   },
   {
-    uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbG-0Pc_dX0swJiOnUTf58QaSAwwUTpBUi6Q&usqp=CAU",
+    uri: "https://variety.com/wp-content/uploads/2023/12/taylor-swift.jpg?w=1000",
   },
   {
-    uri: "https://images.unsplash.com/photo-1483909796554-bb0051ab60ad?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z2lybCUyMHByb2ZpbGV8ZW58MHx8MHx8fDA%3D",
+    uri: "https://www.billboard.com/wp-content/uploads/2023/12/taylor-swift-eras-foxborough-2023-billboard-1548.jpg?w=942&h=623&crop=1",
   },
   {
-    uri: "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
+    uri: "https://s.yimg.com/ny/api/res/1.2/gdF2yTOF3QYV9F4zY.79Fw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTgwNw--/https://media.zenfs.com/en/theblast_73/2c5f1b11ea5bbecbb4547795f385944c",
   },
 ];
 
-const youtubeItems = [{}, {}, {}];
+const youtubeItems = [
+  {
+    title: "Tuning a Guitar - Standard tuning for 6 string guitar",
+    linkPath: "watch?v=jJxRjWtwmEE",
+  },
+  {
+    title: "Halo 2 Classic Multiplayer Gameplay (4v4 Slayer on Ivory Tower)",
+    linkPath: "watch?v=nk9b5G8q9BQ",
+  },
+  {
+    title:
+      "NASA's Stunning Discoveries on Jupiter's Largest Moons | Our Solar System's Moons Supercut",
+    linkPath: "watch?v=Xo6w5QVrABc",
+  },
+];
 
-const YoutubeItem = ({ title }) => {
+const YoutubeItem = ({ title, linkPath }) => {
+  const handleOnPress = () => {
+    Linking.canOpenURL(`vnd.youtube://${linkPath}`).then((supported) => {
+      if (supported) {
+        return Linking.openURL(`vnd.youtube://${linkPath}`);
+      } else {
+        return Linking.openURL(`https://www.youtube.com/${linkPath}`);
+      }
+    });
+  };
   return (
-    <TouchableOpacity style={styles.youtubeItem}>
+    <TouchableOpacity onPress={handleOnPress} style={styles.youtubeItem}>
       <AntDesign
         style={{ marginRight: 5 }}
         name="youtube"
         size={24}
         color="red"
       />
-      <Text style={{ fontSize: 14 }}>{title}</Text>
+      <Text numberOfLines={1} style={{ fontSize: 14, flex: 1 }}>
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -56,24 +82,24 @@ const ProfilePreview = ({ next }) => {
           // mode={"parallax"}
           renderItem={({ item }) => {
             return (
-              <Image
-                contentFit="cover"
-                style={styles.image}
-                source={item.uri}
-              />
+              <View style={styles.carouselItem}>
+                <Image
+                  contentFit="contain"
+                  style={styles.image}
+                  source={item.uri}
+                />
+              </View>
             );
           }}
         />
         <View style={styles.nameAgeContainer}>
-          <Text style={styles.name}>Danielle Mulberry, </Text>
+          <Text style={styles.name}>Taylor Swift, </Text>
           <Text style={styles.age}>34</Text>
         </View>
       </View>
       <View>
         <View style={styles.infoHeader}>
-          <Text style={styles.infoHeaderText}>
-            Similar videos Danielle liked
-          </Text>
+          <Text style={styles.infoHeaderText}>Similar videos Taylor liked</Text>
         </View>
 
         <View>
@@ -84,7 +110,7 @@ const ProfilePreview = ({ next }) => {
                 key={i}
                 containerStyle={{ padding: 0, paddingVertical: 10 }}
               >
-                <YoutubeItem title="Why grass is green " />
+                <YoutubeItem linkPath={e.linkPath} title={e.title} />
               </ListItem>
             );
           })}
@@ -130,7 +156,7 @@ const styles = StyleSheet.create({
   buttonGroup: {
     columnGap: 20,
     position: "absolute",
-    bottom: "6%",
+    bottom: "15%",
     width: Dimensions.get("window").width,
     justifyContent: "center",
     flexDirection: "row",
@@ -161,7 +187,14 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   image: {
+    // width: "50%",
+    // height: "100%",
     flex: 1,
+    // aspectRatio: 1,
+    // resizeMode: "cover",
+    // ...StyleSheet.absoluteFillObject,
+    // height: "100%",
+    // width: 200,
   },
   infoHeader: {
     marginBottom: 4,
@@ -170,6 +203,13 @@ const styles = StyleSheet.create({
   infoHeaderText: {
     fontSize: 16,
     fontWeight: "700",
+  },
+  carouselItem: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: "black",
+    // justifyContent: "center",
+    // alignItems: "center",
   },
 });
 
