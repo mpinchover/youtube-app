@@ -12,6 +12,8 @@ const AccountProfile = () => {
 
       <SettingsInputEditable label="Name" value="James" />
       <Divider />
+      <SettingsInputEditable label="Age" value="32" />
+      <Divider />
       <SettingsInputEditable label="Email" value="James@gmail.com" canEdit />
       <Divider />
       <SettingsInputEditable label="Mobile" value="+1-860-888-8989" canEdit />
