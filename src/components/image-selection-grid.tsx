@@ -1,5 +1,10 @@
 import { Image } from "@rneui/base";
-import { View, StyleSheet, TouchableOpacity} from "react-native";
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  ImageBackground,
+} from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
@@ -26,7 +31,17 @@ const ImageInput = () => {
 
   return (
     <TouchableOpacity onPress={pickImage} style={styles.imageBox}>
-      <Entypo name="image" size={24} color="grey" />
+      {image.length > 0 ? (
+        <ImageBackground
+          source={{
+            uri: image,
+          }}
+          // resizeMode="cover"
+          style={styles.image}
+        />
+      ) : (
+        <Entypo name="image" size={24} color="grey" />
+      )}
     </TouchableOpacity>
   );
 };
@@ -72,6 +87,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     aspectRatio: 1,
+  },
+  image: {
+    // flex: 1,
+    // justifyContent: "center",
+    width: "100%",
+    height: "100%",
   },
 });
 

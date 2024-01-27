@@ -8,7 +8,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Entypo, FontAwesome } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { RecoilRoot } from "recoil";
-
+import { AntDesign } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Screen2 from "./src/screens/settings";
@@ -121,8 +121,12 @@ const MainScreens = ({ navigation }) => {
                   color={color}
                 />
               );
+            } else if (route.name === "Liked") {
+              icon = <AntDesign name="heart" size={24} color={color} />;
             } else if (route.name === "ChannelListScreen") {
               icon = <Entypo name="chat" size={24} color={color} />;
+            } else if (route.name === "Discover") {
+              icon = <AntDesign name="search1" size={24} color={color} />;
             } else {
               icon = <FontAwesome name="snapchat" size={24} color={color} />;
             }
@@ -133,7 +137,9 @@ const MainScreens = ({ navigation }) => {
         };
       }}
     >
-      <Tab.Screen name="Matching" component={Matching} />
+      <Tab.Screen name="Liked" component={Matching} />
+      <Tab.Screen name="Discover" component={Matching} />
+
       <Tab.Screen name="ChannelListScreen" component={ChannelListScreen} />
       <Tab.Screen name="Settings" component={Screen2} />
     </Tab.Navigator>
