@@ -143,8 +143,24 @@ const MainScreens = ({ navigation }) => {
       <Tab.Screen name="Liked" component={Matching} />
       <Tab.Screen name="Discover" component={Matching} />
 
-      <Tab.Screen name="ChannelListScreen" component={ChannelListScreen} />
-      <Tab.Screen name="Settings" component={Screen2} />
+      <Tab.Screen
+        options={() => {
+          return {
+            tabBarLabel: "Messages",
+          };
+        }}
+        name="ChannelListScreen"
+        component={ChannelListScreen}
+      />
+      <Tab.Screen
+        options={() => {
+          return {
+            tabBarLabel: "Account",
+          };
+        }}
+        name="Settings"
+        component={Screen2}
+      />
     </Tab.Navigator>
   );
 };

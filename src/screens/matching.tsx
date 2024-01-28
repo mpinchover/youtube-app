@@ -4,63 +4,48 @@ import { Button } from "@rneui/base";
 import { useState, useRef } from "react";
 import { Animated, Dimensions, ActivityIndicator } from "react-native";
 import {
-  RecoilRoot,
-  atom,
-  selector,
   useRecoilState,
-  useRecoilValue,
 } from "recoil";
-import { matchingCandidates } from "../recoil/matching/matching";
+import {
+  discoverProfiles,
+  discoverProfilesIdx,
+} from "../recoil/matching/matching";
 import axios from "axios";
 
 const Matching = () => {
-  const [candidateProfiles, setCandidateProfiles] =
-    useRecoilState(matchingCandidates);
-
-  const [profilePreviewIdx, setProfilePreviewIdx] = useState(0);
+  const [profiles, setProfiles] = useRecoilState(discoverProfiles);
+  const [profileIndex, setProfileIndex] = useRecoilState(discoverProfilesIdx);
   const [isLoading, setIsLoading] = useState(false);
+
   const translation = useRef(new Animated.Value(0)).current;
   const width = Dimensions.get("window").width;
 
   const next = async () => {
-    // this is the last profile preview that has been loaded up
-    if (profilePreviewIdx === candidateProfiles.length - 1) {
-      try {
-        // set loading screen
-        setIsLoading(true);
-
-        // get candidates
-        const result = await axios.get(
-          "https://jsonplaceholder.typicode.com/comments"
-        );
-
-        for (let i = 0; i < 100; i++) {
-          await axios.get("https://jsonplaceholder.typicode.com/comments");
-        }
-
-        // reset values
-        translation.setValue(0);
-        setProfilePreviewIdx(0);
-        setCandidateProfiles([{}, {}, {}]);
-      } catch (e) {
-        console.log(e);
-      } finally {
-        setIsLoading(false);
-      }
+    if (profileIndex < profiles.length - 1) {
+      Animated.timing(translation, {
+        toValue: -(profileIndex + 1) * width,
+        useNativeDriver: true,
+        duration: 300,
+      }).start();
+      setProfileIndex((prev) => prev + 1);
       return;
     }
 
-    Animated.timing(translation, {
-      toValue: -(profilePreviewIdx + 1) * width,
-      useNativeDriver: true,
-      duration: 300,
-    }).start();
-    setProfilePreviewIdx((prev) => prev + 1);
+    try {
+      setIsLoading(true);
+      for (let i = 0; i < 20; i++) {
+        await axios.get("https://jsonplaceholder.typicode.com/comments");
+      }
+      setProfiles([{}, {}, {}]);
+    } catch (e) {
+      setProfiles([]);
+    } finally {
+      setProfileIndex(0);
+      setIsLoading(false);
+      translation.setValue(0);
+    }
   };
 
-  const acceptCandidate = () => {};
-
-  const rejectCandidate = () => {};
   if (isLoading) {
     return (
       <View style={styles.container}>
@@ -75,13 +60,14 @@ const Matching = () => {
       </View>
     );
   }
-  if (candidateProfiles.length === 0) {
+  if (profiles.length === 0) {
     return (
       <View style={styles.container}>
         <Text>No profiles to show</Text>
       </View>
     );
   }
+  
   return (
     <View style={styles.container}>
       <Animated.View
@@ -92,7 +78,7 @@ const Matching = () => {
           transform: [{ translateX: translation }],
         }}
       >
-        {candidateProfiles.map((e, i) => {
+        {profiles.map((e, i) => {
           return <ProfilePreview key={i} next={next} />;
         })}
       </Animated.View>
