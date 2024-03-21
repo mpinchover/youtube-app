@@ -135,7 +135,10 @@ const MainScreens = ({ navigation }) => {
     >
       <Tab.Screen name="Matching" component={Matching} />
       <Tab.Screen name="ChannelListScreen" component={ChannelListScreen} />
-      <Tab.Screen name="Settings" component={Screen2} />
+
+      <Tab.Screen name="Settings"  component={Screen2} />
+
+
     </Tab.Navigator>
   );
 };

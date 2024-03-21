@@ -22,6 +22,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { SettingsHeader } from "../components/common/headers";
 import axios from "axios";
 import UploadYoutubeDialogBox from "../components/upload-youtube-dialog-box";
+import { createStackNavigator } from "@react-navigation/stack";
 
 const linkItems = [
   {
@@ -41,12 +42,12 @@ const linkItems = [
     title: "Halo 2: behind the scenes with the studio",
   },
 ];
-export default function Settings({ navigation }) {
-  const [visible, setVisible] = useState(false);
-  const [multiSliderValue, setMultiSliderValue] = useState([3, 7]);
-  const [youtubeUrl, setYoutubeUrl] = useState("");
-  const [youtubeUploadError, setYoutubeUploadError] = useState("");
-  const [isUploadingYoutubeUrl, setIsUploadingYoutubeUrl] = useState(false);
+// export default function Settings({ navigation }) {
+//   const [visible, setVisible] = useState(false);
+//   const [multiSliderValue, setMultiSliderValue] = useState([3, 7]);
+//   const [youtubeUrl, setYoutubeUrl] = useState("");
+//   const [youtubeUploadError, setYoutubeUploadError] = useState("");
+//   const [isUploadingYoutubeUrl, setIsUploadingYoutubeUrl] = useState(false);
   // const [youtubeBackgrounds, setYoutubeBackgrounds] = useState({});
 
   // const toggleOverlay = () => {
@@ -88,9 +89,32 @@ export default function Settings({ navigation }) {
   //   return url.toLowerCase().startsWith("https://www.youtube.com");
   // }
 
-  return (
-    <ScrollView style={styles.container}>
+  /**
+   *
+   *
+   * for a modal  <Stack.Group screenOptions={{presentation:'transparentModal'}}>
+   * you need to create stack navigator
+   *
+   *
+   */
+
+const Starter = ({navigation}) => {
+  return <View style={styles.container}>
+    <View><Text>Hi there</Text></View>
+    <Button title="press me" onPress={()=>{navigation.navigate("MyModal")}}/>
+  </View>
+}
+
+const Settings = ({navigation}) => {
+  const [visible, setVisible] = useState(false);
+  const [multiSliderValue, setMultiSliderValue] = useState([3, 7]);
+  const [youtubeUrl, setYoutubeUrl] = useState("");
+  const [youtubeUploadError, setYoutubeUploadError] = useState("");
+  const [isUploadingYoutubeUrl, setIsUploadingYoutubeUrl] = useState(false);
+
+ return <ScrollView style={styles.container}>
       {/* <View style={styles.settingsSection}> */}
+      <Button title="done" onPress={()=>navigation.goBack()}/>
       <TouchableOpacity
         onPress={() => navigation.navigate("AccountProfile")}
         style={styles.settingsTab}
@@ -139,7 +163,22 @@ export default function Settings({ navigation }) {
         />
       </Overlay> */}
     </ScrollView>
-  );
+}
+const RootStack = createStackNavigator();
+
+
+export default function SettingsScreen(){
+  return <RootStack.Navigator screenOptions={{
+    headerShown: false
+  }}>
+    <RootStack.Group>
+         <RootStack.Screen name="StarterModal" component={Starter} />
+      </RootStack.Group>
+
+     <RootStack.Group screenOptions={{ presentation: 'modal' }}>
+        <RootStack.Screen name="MyModal" component={Settings} />
+      </RootStack.Group>
+  </RootStack.Navigator>
 }
 
 const styles = StyleSheet.create({
@@ -184,6 +223,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f5f5f5",
+    // borderWidth:1,
+    // borderColor:"red",
     // alignItems: "center",
     // justifyContent: "center",
   },
