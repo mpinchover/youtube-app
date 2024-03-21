@@ -59,37 +59,10 @@ const renderButtons = ({ next }) => {
   )
 }
 
-const renderButton = (navigation) => {
-  return (
-    <View
-      style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        paddingHorizontal: 10,
-        paddingVertical: 15,
-      }}
-    >
-      <TouchableOpacity
-        style={{
-          flexDirection: 'row',
-          gap: 5,
-        }}
-        onPress={() => navigation.navigate('DatingProfileScreen')}
-      >
-        <AntDesign name='edit' size={16} color='blue' />
-
-        <Text style={{ color: 'blue' }}>Edit profile</Text>
-      </TouchableOpacity>
-    </View>
-  )
-}
-
 const ProfilePreview = ({ navigation, next, images, previewMode = false }) => {
   return (
     <View style={{ position: 'relative' }}>
       <ScrollView style={styles.container}>
-        {previewMode && renderButton(navigation)}
         <View style={styles.profileImages}>
           <Carousel
             panGestureHandlerProps={{

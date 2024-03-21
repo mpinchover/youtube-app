@@ -11,7 +11,7 @@ import { RecoilRoot } from 'recoil'
 import { Button } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import Screen2 from './src/screens/settings'
+import Settings from './src/screens/settings'
 import { MessageChat } from './src/screens/chat'
 import Matching from './src/screens/matching'
 import AccountProfile from './src/screens/account-profile'
@@ -91,7 +91,7 @@ const getHeaderTitle = (route) => {
   return routeName
 }
 
-const MainScreens = ({ navigation }) => {
+const MainScreens = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => {
@@ -133,87 +133,37 @@ const MainScreens = ({ navigation }) => {
         }
       }}
     >
-      <Tab.Screen name='Matching' component={Matching} />
-      <Tab.Screen name='ChannelListScreen' component={ChannelListScreen} />
+      <Tab.Screen
+        options={{
+          headerShown: false,
+        }}
+        name='Matching'
+        component={Matching}
+      />
+      <Tab.Screen
+        options={{
+          headerShown: false,
+        }}
+        name='ChannelListScreen'
+        component={ChannelListScreen}
+      />
 
-      <Tab.Screen name='Settings' component={Screen2} />
+      <Tab.Screen
+        options={{
+          headerShown: false,
+        }}
+        name='Settings'
+        component={Settings}
+      />
     </Tab.Navigator>
   )
 }
 
 // build
-console.log('The chat KEY IS')
-console.log(chatApiKey)
 // @ts-ignore
 const chatClient = StreamChat.getInstance(chatApiKey)
 
-const MainNavigationStack = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Group
-          screenOptions={({ navigation, route }) => {
-            return {
-              headerTitle: getHeaderTitle(route),
-            }
-          }}
-        >
-          <Stack.Screen
-            options={({ route }) => {
-              return {
-                headerTitle: getHeaderTitle(route),
-              }
-            }}
-            name='MainScreens'
-            component={MainScreens}
-          />
-          <Stack.Screen
-            options={({ route }) => {
-              return {
-                headerTitle: 'Something', // set it through global state
-              }
-            }}
-            name='MessageChat'
-            component={MessageChat}
-          />
-
-          <Stack.Screen
-            options={({ route }) => {
-              return {
-                headerTitle: 'Something', // set it through global state
-              }
-            }}
-            name='AccountProfile'
-            component={AccountProfile}
-          />
-          <Stack.Screen
-            options={({ route }) => {
-              return {
-                headerTitle: 'Something', // set it through global state
-              }
-            }}
-            name='DatingFilters'
-            component={DatingFilters}
-          />
-          <Stack.Screen
-            options={({ route }) => {
-              return {
-                headerTitle: 'YoutubeVideoSelection', // set it through global state
-              }
-            }}
-            name='YoutubeVideoSelection'
-            component={YoutubeVideoSelection}
-          />
-          <Stack.Screen
-            name='ChannelListScreen'
-            component={ChannelListScreen}
-          />
-          <Stack.Screen name='ChannelScreen' component={ChannelScreen} />
-        </Stack.Group>
-      </Stack.Navigator>
-    </NavigationContainer>
-  )
-}
+// disable the header here and set it for each of the sub nav stacks
 
 export default function App() {
   const { clientIsReady } = useChatClient()
@@ -223,7 +173,9 @@ export default function App() {
       <GestureHandlerRootView style={{ flex: 1 }}>
         <SafeAreaView style={{ flex: 1 }}>
           <RecoilRoot>
-            <MainNavigationStack />
+            <NavigationContainer>
+              <MainScreens />
+            </NavigationContainer>
           </RecoilRoot>
         </SafeAreaView>
       </GestureHandlerRootView>

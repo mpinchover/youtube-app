@@ -110,7 +110,15 @@ const linkItems = [
  *
  */
 
-const MainSettingsScreen = ({ navigation }) => {
+const MatchingSettingsScreen = ({ navigation }) => {
+  return (
+    <View style={styles.container}>
+      <Text>Matching settings</Text>
+    </View>
+  )
+}
+
+const ProfilePreviewScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ProfilePreview
@@ -129,76 +137,85 @@ const MainSettingsScreen = ({ navigation }) => {
   )
 }
 
-const Settings = ({ navigation }) => {
-  const [visible, setVisible] = useState(false)
-  const [multiSliderValue, setMultiSliderValue] = useState([3, 7])
-  const [youtubeUrl, setYoutubeUrl] = useState('')
-  const [youtubeUploadError, setYoutubeUploadError] = useState('')
-  const [isUploadingYoutubeUrl, setIsUploadingYoutubeUrl] = useState(false)
-
+const Stack = createStackNavigator()
+const MainSettingsScreen = ({ navigation }) => {
   return (
-    <ScrollView style={styles.container}>
-      <Button title='done' onPress={() => navigation.goBack()} />
-      <TouchableOpacity
-        onPress={() => navigation.navigate('AccountProfile')}
-        style={styles.settingsTab}
-      >
-        <Text style={{ fontSize: 16 }}>Account</Text>
-        <AntDesign name='right' size={24} color='black' />
-      </TouchableOpacity>
-      <Divider />
-      <TouchableOpacity
-        onPress={() => navigation.navigate('DatingFilters')}
-        style={styles.settingsTab}
-      >
-        <Text style={{ fontSize: 16 }}>Dating filters</Text>
-        <AntDesign name='right' size={24} color='black' />
-      </TouchableOpacity>
+    <Stack.Navigator>
+      <Stack.Group>
+        <Stack.Screen
+          name='Profile preview'
+          options={({ navigation }) => {
+            return {
+              headerRight: () => {
+                return (
+                  <TouchableOpacity
+                    style={{
+                      flexDirection: 'row',
+                      gap: 5,
+                      paddingHorizontal: 10,
+                    }}
+                    onPress={() => navigation.navigate('MatchingSettings')}
+                  >
+                    <AntDesign name='edit' size={16} color='blue' />
 
-      <View style={styles.settingsSection}>
-        <SettingsHeader title='Images' />
-
-        <ImageSelectionGrid />
-      </View>
-      <View style={styles.settingsSection}>
-        <SettingsHeader title='Youtube videos' />
-        <YoutubeLinkGrid />
-      </View>
-    </ScrollView>
-  )
-}
-const RootStack = createStackNavigator()
-
-export default function SettingsScreen() {
-  return (
-    <RootStack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <RootStack.Group>
-        <RootStack.Screen
-          options={{
-            headerTitle: 'Seguro',
-            headerRight: () => (
-              <Button
-                onPress={() => console.log('This is a button!')}
-                title='Info'
-                color='#fff'
-              />
-            ),
+                    <Text style={{ color: 'blue' }}>Edit profile</Text>
+                  </TouchableOpacity>
+                )
+              },
+            }
           }}
-          name='ProfilePreview'
-          component={MainSettingsScreen}
+          component={ProfilePreviewScreen}
         />
-      </RootStack.Group>
-
-      <RootStack.Group screenOptions={{ presentation: 'modal' }}>
-        <RootStack.Screen name='DatingProfileScreen' component={Settings} />
-      </RootStack.Group>
-    </RootStack.Navigator>
+        <Stack.Screen
+          name='MatchingSettings'
+          component={MatchingSettingsScreen}
+        />
+      </Stack.Group>
+    </Stack.Navigator>
   )
 }
+
+// const Settings = ({ navigation }) => {
+//   const [visible, setVisible] = useState(false)
+//   const [multiSliderValue, setMultiSliderValue] = useState([3, 7])
+//   const [youtubeUrl, setYoutubeUrl] = useState('')
+//   const [youtubeUploadError, setYoutubeUploadError] = useState('')
+//   const [isUploadingYoutubeUrl, setIsUploadingYoutubeUrl] = useState(false)
+
+//   return (
+//     <ScrollView style={styles.container}>
+//       <Button title='done' onPress={() => navigation.goBack()} />
+//       <TouchableOpacity
+//         onPress={() => navigation.navigate('AccountProfile')}
+//         style={styles.settingsTab}
+//       >
+//         <Text style={{ fontSize: 16 }}>Account</Text>
+//         <AntDesign name='right' size={24} color='black' />
+//       </TouchableOpacity>
+//       <Divider />
+//       <TouchableOpacity
+//         onPress={() => navigation.navigate('DatingFilters')}
+//         style={styles.settingsTab}
+//       >
+//         <Text style={{ fontSize: 16 }}>Dating filters</Text>
+//         <AntDesign name='right' size={24} color='black' />
+//       </TouchableOpacity>
+
+//       <View style={styles.settingsSection}>
+//         <SettingsHeader title='Images' />
+
+//         <ImageSelectionGrid />
+//       </View>
+//       <View style={styles.settingsSection}>
+//         <SettingsHeader title='Youtube videos' />
+//         <YoutubeLinkGrid />
+//       </View>
+//     </ScrollView>
+//   )
+// }
+// const RootStack = createStackNavigator()
+
+export default MainSettingsScreen
 
 const styles = StyleSheet.create({
   header: {
