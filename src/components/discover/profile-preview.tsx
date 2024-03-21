@@ -3,6 +3,7 @@ import {
   StyleSheet,
   Dimensions,
   // Text,
+  ScrollView,
   TouchableOpacity,
 } from "react-native";
 import { ListItem, Text } from "@rneui/themed";
@@ -11,6 +12,8 @@ import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import Carousel from "react-native-reanimated-carousel";
+import { MaterialIcons } from '@expo/vector-icons';
+import { Divider } from "@rneui/base";
 
 const images = [
   {
@@ -38,18 +41,19 @@ const YoutubeItem = ({ title }) => {
         size={24}
         color="red"
       />
-      <Text style={{ fontSize: 14 }}>{title}</Text>
+      <Text style={{ fontSize: 16 , color: "#565657"}}>{title}</Text>
     </TouchableOpacity>
   );
 };
 
 const ProfilePreview = ({ next }) => {
   return (
-    <View style={styles.container}>
+    <View style={{position:"relative"}}>
+    <ScrollView style={styles.container}>
       <View style={styles.profileImages}>
         <Carousel
           loop
-          height={Dimensions.get("window").height * 0.4}
+          height={Dimensions.get("window").height * 0.5}
           width={Dimensions.get("window").width}
           // width
           data={images}
@@ -64,23 +68,30 @@ const ProfilePreview = ({ next }) => {
             );
           }}
         />
-        <View style={styles.nameAgeContainer}>
-          <Text style={styles.name}>Danielle Mulberry, </Text>
-          <Text style={styles.age}>34</Text>
-        </View>
+
       </View>
       <View>
-        <View style={styles.infoHeader}>
-          <Text style={styles.infoHeaderText}>
-            Similar videos Danielle liked
-          </Text>
-        </View>
 
-        <View>
+        <View style={styles.infoHeader}>
+          <View style={{ flexDirection:"row", alignItems:"center"}}>
+            <MaterialIcons name="cake" size={16} color="#565657" />
+            <Text>29</Text>
+          </View>
+          <View style={{ flexDirection:"row", alignItems:"center"}}>
+          <Entypo name="location-pin" size={16} color="#565657" />
+            <Text>Brooklyn, New York</Text>
+          </View>
+
+        </View>
+        <Divider />
+
+
+        <View style={styles.similarVideos}>
+          <Text style={styles.profileHeader}>Similar videos to you</Text>
           {youtubeItems.map((e, i) => {
             return (
               <ListItem
-                bottomDivider={i < youtubeItems.length - 1}
+                // bottomDivider={i < youtubeItems.length - 1}
                 key={i}
                 containerStyle={{ padding: 0, paddingVertical: 10 }}
               >
@@ -89,8 +100,12 @@ const ProfilePreview = ({ next }) => {
             );
           })}
         </View>
+
       </View>
-      <View style={[styles.buttonGroup]}>
+      <View style={{height:100}}></View>
+
+    </ScrollView>
+    <View style={[styles.buttonGroup]}>
         <TouchableOpacity
           onPress={next}
           style={[styles.button, { borderWidth: 1, borderColor: "grey" }]}
@@ -106,6 +121,7 @@ const ProfilePreview = ({ next }) => {
           <Text style={{ color: "green" }}>Yes</Text>
         </TouchableOpacity>
       </View>
+
     </View>
   );
 };
@@ -113,7 +129,9 @@ const ProfilePreview = ({ next }) => {
 const styles = StyleSheet.create({
   container: {
     // flex: 1,
-    position: "relative",
+    // position: "relative",
+    // flexGrow:1,
+    // padding:200,
   },
   button: {
     flexDirection: "row",
@@ -134,6 +152,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width,
     justifyContent: "center",
     flexDirection: "row",
+    // backgroundColor:"transparent"
   },
   youtubeItem: {
     marginBottom: 2,
@@ -158,19 +177,31 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   profileImages: {
-    marginBottom: 10,
+    // marginBottom: 10,
   },
   image: {
     flex: 1,
   },
   infoHeader: {
-    marginBottom: 4,
     paddingHorizontal: 10,
+    flexDirection:"row",
+    gap:10,
+    marginVertical:15,
+    alignItems:'center'
   },
-  infoHeaderText: {
+  location: {
     fontSize: 16,
     fontWeight: "700",
   },
+  profileHeader: {
+    fontSize: 16,
+    fontWeight: "700",
+    paddingHorizontal: 10,
+    color:"#565657",
+  },
+  similarVideos: {
+    marginVertical:15,
+  }
 });
 
 export default ProfilePreview;
