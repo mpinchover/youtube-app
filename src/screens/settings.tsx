@@ -1,184 +1,203 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, ScrollView, FlatList } from "react-native";
+import { StatusBar } from 'expo-status-bar'
+import { StyleSheet, View, ScrollView, FlatList, Button } from 'react-native'
 import {
   Input,
   Icon,
   Text,
-  Button,
   Slider,
   ListItem,
   Divider,
   Overlay,
-} from "@rneui/themed";
-import { MaterialIcons } from "@expo/vector-icons";
-import { Dimensions } from "react-native";
-import { useState } from "react";
-import YoutubeLinkGrid from "../components/youtube-link-grid";
-import Label from "../components/label";
-import MultiSlider from "@ptomasroos/react-native-multi-slider";
-import ImageSelectionGrid from "../components/image-selection-grid";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { AntDesign } from "@expo/vector-icons";
-import { SettingsHeader } from "../components/common/headers";
-import axios from "axios";
-import UploadYoutubeDialogBox from "../components/upload-youtube-dialog-box";
-import { createStackNavigator } from "@react-navigation/stack";
+} from '@rneui/themed'
+import { MaterialIcons } from '@expo/vector-icons'
+import { Dimensions } from 'react-native'
+import { useState } from 'react'
+import YoutubeLinkGrid from '../components/youtube-link-grid'
+import Label from '../components/label'
+import MultiSlider from '@ptomasroos/react-native-multi-slider'
+import ImageSelectionGrid from '../components/image-selection-grid'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import { AntDesign } from '@expo/vector-icons'
+import { SettingsHeader } from '../components/common/headers'
+import axios from 'axios'
+import UploadYoutubeDialogBox from '../components/upload-youtube-dialog-box'
+import { createStackNavigator } from '@react-navigation/stack'
+import ProfilePreview from '../components/discover/profile-preview'
+
+const images = [
+  {
+    uri: 'https://media.istockphoto.com/id/1300512215/photo/headshot-portrait-of-smiling-ethnic-businessman-in-office.jpg?s=612x612&w=0&k=20&c=QjebAlXBgee05B3rcLDAtOaMtmdLjtZ5Yg9IJoiy-VY=',
+  },
+  {
+    uri: 'https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg',
+  },
+  {
+    uri: 'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg',
+  },
+]
 
 const linkItems = [
   {
-    title: "How to grow your own candy",
+    title: 'How to grow your own candy',
   },
   {
-    title: "Miley Cryus live at the Grand Fox stadium",
+    title: 'Miley Cryus live at the Grand Fox stadium',
   },
   {
-    title: "Best deals of 2023 on Amazon",
+    title: 'Best deals of 2023 on Amazon',
   },
   {
     title:
-      "Blender hacks for Blender 3.2. How to model like a pro and get your work noticed by the top VFX studios",
+      'Blender hacks for Blender 3.2. How to model like a pro and get your work noticed by the top VFX studios',
   },
   {
-    title: "Halo 2: behind the scenes with the studio",
+    title: 'Halo 2: behind the scenes with the studio',
   },
-];
+]
 // export default function Settings({ navigation }) {
 //   const [visible, setVisible] = useState(false);
 //   const [multiSliderValue, setMultiSliderValue] = useState([3, 7]);
 //   const [youtubeUrl, setYoutubeUrl] = useState("");
 //   const [youtubeUploadError, setYoutubeUploadError] = useState("");
 //   const [isUploadingYoutubeUrl, setIsUploadingYoutubeUrl] = useState(false);
-  // const [youtubeBackgrounds, setYoutubeBackgrounds] = useState({});
+// const [youtubeBackgrounds, setYoutubeBackgrounds] = useState({});
 
-  // const toggleOverlay = () => {
-  //   setVisible(!visible);
-  //   setYoutubeUrl("");
-  // };
+// const toggleOverlay = () => {
+//   setVisible(!visible);
+//   setYoutubeUrl("");
+// };
 
-  // const selectVideoForUpload = () => {
-  //   toggleOverlay();
-  // };
+// const selectVideoForUpload = () => {
+//   toggleOverlay();
+// };
 
-  // const handleUploadYoutubeUrl = async (youtubeURL, idx) => {
-  //   if (!validateYoutubeUrl(youtubeURL)) {
-  //     setYoutubeUploadError("This youtube url doesn't look right, try again");
-  //     return;
-  //   }
-  //   setIsUploadingYoutubeUrl(true);
+// const handleUploadYoutubeUrl = async (youtubeURL, idx) => {
+//   if (!validateYoutubeUrl(youtubeURL)) {
+//     setYoutubeUploadError("This youtube url doesn't look right, try again");
+//     return;
+//   }
+//   setIsUploadingYoutubeUrl(true);
 
-  //   try {
-  //     for (let i = 0; i < 30; i++) {
-  //       await axios.get("https://jsonplaceholder.typicode.com/comments");
-  //     }
-  //     setYoutubeBackgrounds((prev) => {
-  //       return {
-  //         ...prev,
-  //         idx: youtubeURL,
-  //       };
-  //     });
-  //   } catch (e) {
-  //     console.log(e);
-  //   } finally {
-  //     setIsUploadingYoutubeUrl(false);
-  //   }
-  // };
+//   try {
+//     for (let i = 0; i < 30; i++) {
+//       await axios.get("https://jsonplaceholder.typicode.com/comments");
+//     }
+//     setYoutubeBackgrounds((prev) => {
+//       return {
+//         ...prev,
+//         idx: youtubeURL,
+//       };
+//     });
+//   } catch (e) {
+//     console.log(e);
+//   } finally {
+//     setIsUploadingYoutubeUrl(false);
+//   }
+// };
 
-  // function validateYoutubeUrl(url) {
-  //   // const regex = /^https:\/\/www\.youtube\.com(\/.*)?$/;
-  //   // return regex.test(url.toLowerCase());
-  //   return url.toLowerCase().startsWith("https://www.youtube.com");
-  // }
+// function validateYoutubeUrl(url) {
+//   // const regex = /^https:\/\/www\.youtube\.com(\/.*)?$/;
+//   // return regex.test(url.toLowerCase());
+//   return url.toLowerCase().startsWith("https://www.youtube.com");
+// }
 
-  /**
-   *
-   *
-   * for a modal  <Stack.Group screenOptions={{presentation:'transparentModal'}}>
-   * you need to create stack navigator
-   *
-   *
-   */
+/**
+ *
+ *
+ * for a modal  <Stack.Group screenOptions={{presentation:'transparentModal'}}>
+ * you need to create stack navigator
+ *
+ *
+ */
 
-const Starter = ({navigation}) => {
-  return <View style={styles.container}>
-    <View><Text>Hi there</Text></View>
-    <Button title="press me" onPress={()=>{navigation.navigate("MyModal")}}/>
-  </View>
+const MainSettingsScreen = ({ navigation }) => {
+  return (
+    <View style={styles.container}>
+      <ProfilePreview
+        navigation={navigation}
+        images={images}
+        next={() => {}}
+        previewMode={true}
+      />
+      <Button
+        title='press me'
+        onPress={() => {
+          navigation.navigate('MyModal')
+        }}
+      />
+    </View>
+  )
 }
 
-const Settings = ({navigation}) => {
-  const [visible, setVisible] = useState(false);
-  const [multiSliderValue, setMultiSliderValue] = useState([3, 7]);
-  const [youtubeUrl, setYoutubeUrl] = useState("");
-  const [youtubeUploadError, setYoutubeUploadError] = useState("");
-  const [isUploadingYoutubeUrl, setIsUploadingYoutubeUrl] = useState(false);
+const Settings = ({ navigation }) => {
+  const [visible, setVisible] = useState(false)
+  const [multiSliderValue, setMultiSliderValue] = useState([3, 7])
+  const [youtubeUrl, setYoutubeUrl] = useState('')
+  const [youtubeUploadError, setYoutubeUploadError] = useState('')
+  const [isUploadingYoutubeUrl, setIsUploadingYoutubeUrl] = useState(false)
 
- return <ScrollView style={styles.container}>
-      {/* <View style={styles.settingsSection}> */}
-      <Button title="done" onPress={()=>navigation.goBack()}/>
+  return (
+    <ScrollView style={styles.container}>
+      <Button title='done' onPress={() => navigation.goBack()} />
       <TouchableOpacity
-        onPress={() => navigation.navigate("AccountProfile")}
+        onPress={() => navigation.navigate('AccountProfile')}
         style={styles.settingsTab}
       >
         <Text style={{ fontSize: 16 }}>Account</Text>
-        <AntDesign name="right" size={24} color="black" />
+        <AntDesign name='right' size={24} color='black' />
       </TouchableOpacity>
       <Divider />
       <TouchableOpacity
-        onPress={() => navigation.navigate("DatingFilters")}
+        onPress={() => navigation.navigate('DatingFilters')}
         style={styles.settingsTab}
       >
         <Text style={{ fontSize: 16 }}>Dating filters</Text>
-        <AntDesign name="right" size={24} color="black" />
+        <AntDesign name='right' size={24} color='black' />
       </TouchableOpacity>
 
       <View style={styles.settingsSection}>
-        <SettingsHeader title="Images" />
+        <SettingsHeader title='Images' />
 
         <ImageSelectionGrid />
       </View>
       <View style={styles.settingsSection}>
-        <SettingsHeader title="Youtube videos" />
-        <YoutubeLinkGrid
-        // youtubeBackgrounds={youtubeBackgrounds}
-        // selectVideoForUpload={selectVideoForUpload}
-        // navigation={navigation}
-        />
+        <SettingsHeader title='Youtube videos' />
+        <YoutubeLinkGrid />
       </View>
-      {/* <Overlay
-        overlayStyle={{
-          // width: "100%",
-          // marginHorizontal: 100,
-          width: Dimensions.get("window").width - 20,
-          height: Dimensions.get("window").height / 3,
-          justifyContent: "center",
-        }}
-        isVisible={visible}
-        onBackdropPress={toggleOverlay}
-      >
-        <UploadYoutubeDialogBox
-          isUploadingYoutubeUrl={isUploadingYoutubeUrl}
-          setYoutubeUploadError={setYoutubeUploadError}
-          handleUploadYoutubeUrl={handleUploadYoutubeUrl}
-          youtubeUploadError={youtubeUploadError}
-        />
-      </Overlay> */}
     </ScrollView>
+  )
 }
-const RootStack = createStackNavigator();
+const RootStack = createStackNavigator()
 
-
-export default function SettingsScreen(){
-  return <RootStack.Navigator screenOptions={{
-    headerShown: false
-  }}>
-    <RootStack.Group>
-         <RootStack.Screen name="StarterModal" component={Starter} />
+export default function SettingsScreen() {
+  return (
+    <RootStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <RootStack.Group>
+        <RootStack.Screen
+          options={{
+            headerTitle: 'Seguro',
+            headerRight: () => (
+              <Button
+                onPress={() => console.log('This is a button!')}
+                title='Info'
+                color='#fff'
+              />
+            ),
+          }}
+          name='ProfilePreview'
+          component={MainSettingsScreen}
+        />
       </RootStack.Group>
 
-     <RootStack.Group screenOptions={{ presentation: 'modal' }}>
-        <RootStack.Screen name="MyModal" component={Settings} />
+      <RootStack.Group screenOptions={{ presentation: 'modal' }}>
+        <RootStack.Screen name='DatingProfileScreen' component={Settings} />
       </RootStack.Group>
-  </RootStack.Navigator>
+    </RootStack.Navigator>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -188,12 +207,12 @@ const styles = StyleSheet.create({
   settingsTab: {
     // fontSize: 18,
     // borderWidth: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     borderRadius: 4,
     padding: 12,
-    backgroundColor: "white",
+    backgroundColor: 'white',
     // marginBottom: 10,
   },
   // overlay: {
@@ -207,12 +226,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 4,
     // paddingHorizontal: 10,
-    width: "100%",
+    width: '100%',
   },
   button: {
     // alignItems: "flex-start",
     // borderWidth: 1,
-    alignSelf: "flex-start",
+    alignSelf: 'flex-start',
     // padding: 0,
     // margin: 0,
     // marginLeft: 10,
@@ -222,7 +241,9 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#f5f5f5",
+    // backgroundColor: "#f5f5f5",
+    backgroundColor: 'white',
+    borderRadius: 0,
     // borderWidth:1,
     // borderColor:"red",
     // alignItems: "center",
@@ -233,4 +254,4 @@ const styles = StyleSheet.create({
     marginTop: 20,
     // paddingHorizontal: 10,
   },
-});
+})

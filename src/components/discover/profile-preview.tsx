@@ -3,139 +3,155 @@ import {
   StyleSheet,
   Dimensions,
   // Text,
+  Button,
   ScrollView,
   TouchableOpacity,
-} from "react-native";
-import { ListItem, Text } from "@rneui/themed";
-import { Image } from "expo-image";
-import { AntDesign } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
-import Carousel from "react-native-reanimated-carousel";
-import { MaterialIcons } from '@expo/vector-icons';
-import { Divider } from "@rneui/base";
-import { LinearGradient } from 'expo-linear-gradient';
+  Touchable,
+} from 'react-native'
+import { ListItem, Text } from '@rneui/themed'
+import { Image } from 'expo-image'
+import { AntDesign } from '@expo/vector-icons'
+import { FontAwesome } from '@expo/vector-icons'
+import { Entypo } from '@expo/vector-icons'
+import Carousel from 'react-native-reanimated-carousel'
+import { MaterialIcons } from '@expo/vector-icons'
+import { Divider } from '@rneui/base'
+import { LinearGradient } from 'expo-linear-gradient'
 
-const images = [
-  {
-    uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWomPds9w5emH_C6RY8xF7KRCJe6I5zwVsuw&usqp=CAU",
-  },
-  {
-    uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbG-0Pc_dX0swJiOnUTf58QaSAwwUTpBUi6Q&usqp=CAU",
-  },
-  {
-    uri: "https://images.unsplash.com/photo-1483909796554-bb0051ab60ad?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z2lybCUyMHByb2ZpbGV8ZW58MHx8MHx8fDA%3D",
-  },
-  {
-    uri: "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
-  },
-];
-
-const youtubeItems = [{}, {}, {}];
+const youtubeItems = [{}, {}, {}]
 
 const YoutubeItem = ({ title }) => {
   return (
     <TouchableOpacity style={styles.youtubeItem}>
       <AntDesign
         style={{ marginRight: 5 }}
-        name="youtube"
+        name='youtube'
         size={24}
-        color="red"
+        color='red'
       />
-      <Text style={{ fontSize: 16 , color: "#565657"}}>{title}</Text>
+      <Text style={{ fontSize: 16, color: '#565657' }}>{title}</Text>
     </TouchableOpacity>
-  );
-};
+  )
+}
 
-const ProfilePreview = ({ next }) => {
+interface Props {
+  item: any
+}
+
+const renderButtons = ({ next }) => {
   return (
-    <View style={{position:"relative"}}>
-    <ScrollView style={styles.container}>
-      <View style={styles.profileImages}>
-        <Carousel
-          loop
-          height={Dimensions.get("window").height * 0.5}
-          width={Dimensions.get("window").width}
-          // width
-          data={images}
-          // mode={"parallax"}
-          renderItem={({ item }) => {
-            return (
-              <Image
-                contentFit="cover"
-                style={styles.image}
-                source={item.uri}
-              />
-            );
-          }}
-        />
+    <View style={[styles.buttonGroup]}>
+      <TouchableOpacity
+        onPress={next}
+        style={[styles.button, { borderWidth: 1, borderColor: 'grey' }]}
+      >
+        <FontAwesome name='remove' size={16} color='grey' />
+        <Text style={{ color: 'grey' }}>No</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={next}
+        style={[styles.button, { borderWidth: 1, borderColor: 'green' }]}
+      >
+        <Entypo name='check' size={16} color='green' />
+        <Text style={{ color: 'green' }}>Yes</Text>
+      </TouchableOpacity>
+    </View>
+  )
+}
 
-      </View>
-      <View>
+const renderButton = (navigation) => {
+  return (
+    <View
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        paddingHorizontal: 10,
+        paddingVertical: 15,
+      }}
+    >
+      <TouchableOpacity
+        style={{
+          flexDirection: 'row',
+          gap: 5,
+        }}
+        onPress={() => navigation.navigate('DatingProfileScreen')}
+      >
+        <AntDesign name='edit' size={16} color='blue' />
 
-        <View style={styles.infoHeader}>
-          <View style={{ flexDirection:"row", alignItems:"center"}}>
-            <MaterialIcons name="cake" size={16} color="#565657" />
-            <Text>29</Text>
-          </View>
-          <View style={{ flexDirection:"row", alignItems:"center"}}>
-          <Entypo name="location-pin" size={16} color="#565657" />
-            <Text>Brooklyn, New York</Text>
-          </View>
+        <Text style={{ color: 'blue' }}>Edit profile</Text>
+      </TouchableOpacity>
+    </View>
+  )
+}
 
+const ProfilePreview = ({ navigation, next, images, previewMode = false }) => {
+  return (
+    <View style={{ position: 'relative' }}>
+      <ScrollView style={styles.container}>
+        {previewMode && renderButton(navigation)}
+        <View style={styles.profileImages}>
+          <Carousel
+            panGestureHandlerProps={{
+              activeOffsetX: [-10, 10],
+            }}
+            loop
+            height={Dimensions.get('window').height * 0.5}
+            width={Dimensions.get('window').width}
+            // width
+            data={images}
+            // mode={"parallax"}
+            renderItem={({ item }: Props) => {
+              return (
+                <Image
+                  contentFit='cover'
+                  style={styles.image}
+                  source={item.uri}
+                />
+              )
+            }}
+          />
         </View>
-        <Divider />
+        <View>
+          <View style={styles.infoHeader}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <MaterialIcons name='cake' size={16} color='#565657' />
+              <Text>29</Text>
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Entypo name='location-pin' size={16} color='#565657' />
+              <Text>Brooklyn, New York</Text>
+            </View>
+          </View>
+          <Divider />
 
-
-        <View style={styles.similarVideos}>
-          <Text style={styles.profileHeader}>Similar videos to you</Text>
-          {youtubeItems.map((e, i) => {
-            return (
-              <ListItem
-                // bottomDivider={i < youtubeItems.length - 1}
-                key={i}
-                containerStyle={{ padding: 0, paddingVertical: 10 }}
-              >
-                <YoutubeItem title="Why grass is green " />
-              </ListItem>
-            );
-          })}
+          <View style={styles.similarVideos}>
+            <Text style={styles.profileHeader}>Similar videos to you</Text>
+            {youtubeItems.map((e, i) => {
+              return (
+                <ListItem
+                  // bottomDivider={i < youtubeItems.length - 1}
+                  key={i}
+                  containerStyle={{ padding: 0, paddingVertical: 10 }}
+                >
+                  <YoutubeItem title='Why grass is green ' />
+                </ListItem>
+              )
+            })}
+          </View>
         </View>
-
-      </View>
-      <View style={{height:100}}></View>
-
-
-
-    </ScrollView>
-    <LinearGradient
+        <View style={{ height: 100, backgroundColor: 'white' }}></View>
+      </ScrollView>
+      <LinearGradient
         // Background Linear Gradient
         colors={['rgba(255, 255, 255, .1)', 'rgba(255, 255, 255, 1)']}
         style={styles.background}
         pointerEvents={'none'}
       />
-
-
-    <View style={[styles.buttonGroup]}>
-        <TouchableOpacity
-          onPress={next}
-          style={[styles.button, { borderWidth: 1, borderColor: "grey" }]}
-        >
-          <FontAwesome name="remove" size={16} color="grey" />
-          <Text style={{ color: "grey" }}>No</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={next}
-          style={[styles.button, { borderWidth: 1, borderColor: "green" }]}
-        >
-          <Entypo name="check" size={16} color="green" />
-          <Text style={{ color: "green" }}>Yes</Text>
-        </TouchableOpacity>
-      </View>
-
+      {!previewMode && renderButtons({ next })}
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -148,49 +164,49 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    bottom:0,
+    bottom: 0,
     // top: 0,
-    height: 200,
+    height: 150,
   },
   button: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     borderWidth: 1,
     borderRadius: 4,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    justifyContent: "center",
+    justifyContent: 'center',
     columnGap: 4,
-    backgroundColor: "white",
+    backgroundColor: 'white',
     width: 100,
   },
   buttonGroup: {
     columnGap: 20,
-    position: "absolute",
-    bottom: "6%",
-    width: Dimensions.get("window").width,
-    justifyContent: "center",
-    flexDirection: "row",
+    position: 'absolute',
+    bottom: '6%',
+    width: Dimensions.get('window').width,
+    justifyContent: 'center',
+    flexDirection: 'row',
     // backgroundColor:"transparent"
   },
   youtubeItem: {
     marginBottom: 2,
-    flexDirection: "row",
+    flexDirection: 'row',
     paddingHorizontal: 10,
-    alignItems: "center",
+    alignItems: 'center',
   },
   nameAgeContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     paddingHorizontal: 10,
     bottom: 10,
     left: 10,
-    position: "absolute",
-    backgroundColor: "rgba(255, 255, 255, 0.6)",
+    position: 'absolute',
+    backgroundColor: 'rgba(255, 255, 255, 0.6)',
     padding: 5,
   },
   name: {
     fontSize: 14,
-    fontWeight: "500",
+    fontWeight: '500',
   },
   age: {
     fontSize: 14,
@@ -203,24 +219,24 @@ const styles = StyleSheet.create({
   },
   infoHeader: {
     paddingHorizontal: 10,
-    flexDirection:"row",
-    gap:10,
-    marginVertical:15,
-    alignItems:'center'
+    flexDirection: 'row',
+    gap: 10,
+    marginVertical: 15,
+    alignItems: 'center',
   },
   location: {
     fontSize: 16,
-    fontWeight: "700",
+    fontWeight: '700',
   },
   profileHeader: {
     fontSize: 16,
-    fontWeight: "700",
+    fontWeight: '700',
     paddingHorizontal: 10,
-    color:"#565657",
+    color: '#565657',
   },
   similarVideos: {
-    marginVertical:15,
-  }
-});
+    marginVertical: 15,
+  },
+})
 
-export default ProfilePreview;
+export default ProfilePreview
