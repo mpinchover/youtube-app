@@ -45,7 +45,8 @@
     "react-native-screens": "^3.29.0",
     "react-native-svg": "13.9.0",
     "recoil": "^0.7.7",
-    "stream-chat-expo": "^5.23.2"
+    "stream-chat-expo": "^5.23.2",
+    "expo-linear-gradient": "~12.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

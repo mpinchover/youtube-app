@@ -14,6 +14,7 @@ import { Entypo } from "@expo/vector-icons";
 import Carousel from "react-native-reanimated-carousel";
 import { MaterialIcons } from '@expo/vector-icons';
 import { Divider } from "@rneui/base";
+import { LinearGradient } from 'expo-linear-gradient';
 
 const images = [
   {
@@ -104,7 +105,17 @@ const ProfilePreview = ({ next }) => {
       </View>
       <View style={{height:100}}></View>
 
+
+
     </ScrollView>
+    <LinearGradient
+        // Background Linear Gradient
+        colors={['rgba(255, 255, 255, .1)', 'rgba(255, 255, 255, 1)']}
+        style={styles.background}
+        pointerEvents={'none'}
+      />
+
+
     <View style={[styles.buttonGroup]}>
         <TouchableOpacity
           onPress={next}
@@ -132,6 +143,14 @@ const styles = StyleSheet.create({
     // position: "relative",
     // flexGrow:1,
     // padding:200,
+  },
+  background: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom:0,
+    // top: 0,
+    height: 200,
   },
   button: {
     flexDirection: "row",
