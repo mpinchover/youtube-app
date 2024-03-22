@@ -17,6 +17,8 @@ import Carousel from 'react-native-reanimated-carousel'
 import { MaterialIcons } from '@expo/vector-icons'
 import { Divider } from '@rneui/base'
 import { LinearGradient } from 'expo-linear-gradient'
+import { FontAwesome5 } from '@expo/vector-icons'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 const youtubeItems = [{}, {}, {}]
 
@@ -29,7 +31,7 @@ const YoutubeItem = ({ title }) => {
         size={24}
         color='red'
       />
-      <Text style={{ fontSize: 16, color: '#565657' }}>{title}</Text>
+      <Text style={{ fontSize: 14, color: '#565657' }}>{title}</Text>
     </TouchableOpacity>
   )
 }
@@ -46,15 +48,57 @@ const renderButtons = ({ next }) => {
         style={[styles.button, { borderWidth: 1, borderColor: 'grey' }]}
       >
         <FontAwesome name='remove' size={16} color='grey' />
-        <Text style={{ color: 'grey' }}>No</Text>
+        {/* <Text style={{ color: 'grey' }}>No</Text> */}
       </TouchableOpacity>
       <TouchableOpacity
         onPress={next}
         style={[styles.button, { borderWidth: 1, borderColor: 'green' }]}
       >
         <Entypo name='check' size={16} color='green' />
-        <Text style={{ color: 'green' }}>Yes</Text>
+        {/* <Text style={{ color: 'green' }}>Yes</Text> */}
       </TouchableOpacity>
+    </View>
+  )
+}
+
+const InfoHeader = () => {
+  return (
+    <View style={styles.infoHeader}>
+      <View style={{ flexDirection: 'row', gap: 8 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 2 }}>
+          <MaterialIcons name='cake' size={16} color='#565657' />
+          <Text>29</Text>
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 2 }}>
+          <Entypo name='location-pin' size={16} color='#565657' />
+          <Text>Brooklyn, New York</Text>
+        </View>
+      </View>
+      <View style={{ flexDirection: 'row', gap: 2 }}>
+        <Text style={{ fontSize: 14, fontWeight: '500' }}>
+          Engineering manager
+        </Text>
+        <Text style={{ fontSize: 14, fontWeight: '500' }}>@</Text>
+        <Text style={{ fontSize: 14, fontWeight: '500' }}>Meta</Text>
+      </View>
+    </View>
+  )
+}
+
+const ProfileDrugs = () => {
+  return (
+    <View style={styles.similarVideos}>
+      <Text style={[styles.profileHeader, { marginBottom: 10 }]}>Drugs</Text>
+      <View style={[styles.drugs]}>
+        <FontAwesome5 name='canadian-maple-leaf' size={24} color='darkgreen' />
+        <MaterialCommunityIcons name='mushroom' size={24} color='red' />
+        <MaterialCommunityIcons name='pill' size={24} color='orange' />
+        {/* <MaterialCommunityIcons name='wallpaper' size={24} color='black' />
+        <AntDesign name='minussquareo' size={24} color='black' /> */}
+        <Entypo name='documents' size={24} color='darkblue' />
+        <FontAwesome name='coffee' size={24} color='black' />
+        <FontAwesome5 name='beer' size={24} color='lightsalmon' />
+      </View>
     </View>
   )
 }
@@ -86,20 +130,11 @@ const ProfilePreview = ({ navigation, next, images, previewMode = false }) => {
           />
         </View>
         <View>
-          <View style={styles.infoHeader}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <MaterialIcons name='cake' size={16} color='#565657' />
-              <Text>29</Text>
-            </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Entypo name='location-pin' size={16} color='#565657' />
-              <Text>Brooklyn, New York</Text>
-            </View>
-          </View>
+          <InfoHeader />
           <Divider />
 
           <View style={styles.similarVideos}>
-            <Text style={styles.profileHeader}>Similar videos to you</Text>
+            <Text style={styles.profileHeader}>Videos</Text>
             {youtubeItems.map((e, i) => {
               return (
                 <ListItem
@@ -107,13 +142,17 @@ const ProfilePreview = ({ navigation, next, images, previewMode = false }) => {
                   key={i}
                   containerStyle={{ padding: 0, paddingVertical: 10 }}
                 >
-                  <YoutubeItem title='Why grass is green ' />
+                  <YoutubeItem title='Why grass is green and larn is white ' />
                 </ListItem>
               )
             })}
           </View>
         </View>
-        <View style={{ height: 100, backgroundColor: 'white' }}></View>
+        <Divider />
+
+        <ProfileDrugs />
+
+        <View style={{ height: 150, backgroundColor: 'white' }}></View>
       </ScrollView>
       <LinearGradient
         // Background Linear Gradient
@@ -127,12 +166,7 @@ const ProfilePreview = ({ navigation, next, images, previewMode = false }) => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-    // position: "relative",
-    // flexGrow:1,
-    // padding:200,
-  },
+  container: {},
   background: {
     position: 'absolute',
     left: 0,
@@ -145,13 +179,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderRadius: 4,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    borderRadius: 50,
+    // paddingVertical: 10,
+    // paddingHorizontal: 20,
     justifyContent: 'center',
     columnGap: 4,
     backgroundColor: 'white',
-    width: 100,
+    width: 70,
+    height: 70,
   },
   buttonGroup: {
     columnGap: 20,
@@ -192,23 +227,28 @@ const styles = StyleSheet.create({
   },
   infoHeader: {
     paddingHorizontal: 10,
-    flexDirection: 'row',
+    // flexDirection: 'row',
     gap: 10,
     marginVertical: 15,
-    alignItems: 'center',
+    justifyContent: 'center',
   },
   location: {
     fontSize: 16,
     fontWeight: '700',
   },
   profileHeader: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '700',
     paddingHorizontal: 10,
     color: '#565657',
   },
   similarVideos: {
     marginVertical: 15,
+  },
+  drugs: {
+    paddingHorizontal: 10,
+    flexDirection: 'row',
+    gap: 20,
   },
 })
 

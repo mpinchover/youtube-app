@@ -12,22 +12,22 @@ import {
 } from 'recoil'
 import { matchingCandidates } from '../recoil/matching/matching'
 import axios from 'axios'
+import { createStackNavigator } from '@react-navigation/stack'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 const images = [
   {
-    uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWomPds9w5emH_C6RY8xF7KRCJe6I5zwVsuw&usqp=CAU',
+    uri: 'https://m.media-amazon.com/images/M/MV5BZGM0YjhkZmEtNGYxYy00OTk0LThlNDgtNGQzM2YwNjU0NDQzXkEyXkFqcGdeQXVyMTU3ODQxNDYz._V1_.jpg',
   },
   {
-    uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbG-0Pc_dX0swJiOnUTf58QaSAwwUTpBUi6Q&usqp=CAU',
+    uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_R_-4WZucf8KtbGVAjN6o0-Gl7Ukj3Om85y81PDYV_w&s',
   },
   {
-    uri: 'https://images.unsplash.com/photo-1483909796554-bb0051ab60ad?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z2lybCUyMHByb2ZpbGV8ZW58MHx8MHx8fDA%3D',
-  },
-  {
-    uri: 'https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg',
+    uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdUPxnJnJLTOmmZxXglLzaiwdYPYGdSU06JvJLkf6JOQ&s',
   },
 ]
 
+const Stack = createStackNavigator()
 const Matching = ({ navigation }) => {
   const [candidateProfiles, setCandidateProfiles] =
     useRecoilState(matchingCandidates)
@@ -116,6 +116,16 @@ const Matching = ({ navigation }) => {
   )
 }
 
+const MatchingSCreen = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Group>
+        <Stack.Screen name='Discover' component={Matching} />
+      </Stack.Group>
+    </Stack.Navigator>
+  )
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -125,4 +135,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Matching
+export default MatchingSCreen

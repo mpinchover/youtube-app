@@ -102,12 +102,10 @@ const linkItems = [
 // }
 
 /**
- *
- *
- * for a modal  <Stack.Group screenOptions={{presentation:'transparentModal'}}>
- * you need to create stack navigator
- *
- *
+
+
+
+
  */
 
 const MatchingSettingsScreen = ({ navigation }) => {
@@ -153,12 +151,13 @@ const MainSettingsScreen = ({ navigation }) => {
                       flexDirection: 'row',
                       gap: 5,
                       paddingHorizontal: 10,
+                      alignItems: 'center',
                     }}
-                    onPress={() => navigation.navigate('MatchingSettings')}
+                    onPress={() => navigation.navigate('Profile')}
                   >
-                    <AntDesign name='edit' size={16} color='blue' />
+                    <AntDesign name='edit' size={20} color='#007AFF' />
 
-                    <Text style={{ color: 'blue' }}>Edit profile</Text>
+                    <Text style={{ color: '#007AFF', fontSize: 18 }}>Edit</Text>
                   </TouchableOpacity>
                 )
               },
@@ -166,10 +165,7 @@ const MainSettingsScreen = ({ navigation }) => {
           }}
           component={ProfilePreviewScreen}
         />
-        <Stack.Screen
-          name='MatchingSettings'
-          component={MatchingSettingsScreen}
-        />
+        <Stack.Screen name='Profile' component={MatchingSettingsScreen} />
       </Stack.Group>
     </Stack.Navigator>
   )

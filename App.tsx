@@ -13,7 +13,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Settings from './src/screens/settings'
 import { MessageChat } from './src/screens/chat'
-import Matching from './src/screens/matching'
+import Discover from './src/screens/discover'
 import AccountProfile from './src/screens/account-profile'
 import DatingFilters from './src/screens/dating-filters'
 import YoutubeVideoSelection from './src/screens/youtube-video-selection'
@@ -121,8 +121,10 @@ const MainScreens = () => {
                   color={color}
                 />
               )
-            } else if (route.name === 'ChannelListScreen') {
+            } else if (route.name === 'Messages') {
               icon = <Entypo name='chat' size={24} color={color} />
+            } else if (route.name === 'Discover') {
+              icon = <Entypo name='magnifying-glass' size={24} color={color} />
             } else {
               icon = <FontAwesome name='snapchat' size={24} color={color} />
             }
@@ -137,14 +139,14 @@ const MainScreens = () => {
         options={{
           headerShown: false,
         }}
-        name='Matching'
-        component={Matching}
+        name='Discover'
+        component={Discover}
       />
       <Tab.Screen
         options={{
           headerShown: false,
         }}
-        name='ChannelListScreen'
+        name='Messages'
         component={ChannelListScreen}
       />
 
