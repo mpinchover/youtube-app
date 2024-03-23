@@ -7,6 +7,7 @@ Height?
 Location
 Occuptation?
 Drugs -> multiple choice
+Age
 
 Name
 Gender

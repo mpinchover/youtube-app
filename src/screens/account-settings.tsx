@@ -1,5 +1,13 @@
 import { Divider } from '@rneui/base'
-import { View, Text, StyleSheet, TextInput, ScrollView } from 'react-native'
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  ScrollView,
+  Touchable,
+  TouchableWithoutFeedback,
+} from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 
 import { Entypo } from '@expo/vector-icons'
@@ -7,6 +15,7 @@ import { FontAwesome5 } from '@expo/vector-icons'
 import { FontAwesome } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const SettingsInput = ({ label, value, canEdit = true }) => {
   return (
@@ -22,22 +31,37 @@ const SettingsInput = ({ label, value, canEdit = true }) => {
   )
 }
 
-const SettingsInputMultipleChoice = ({ label, value }) => {
+const SettingsInputMultipleChoice = ({ label, value, handlePress }) => {
   return (
     <View style={styles.textInput}>
       <Text style={styles.textLabel}> {label} </Text>
-      <TextInput style={{ color: '#565657' }} value={value} />
-      <AntDesign
-        style={{ position: 'absolute', right: 10 }}
-        name='right'
-        size={16}
-        color='black'
-      />
+
+      <View style={{ flex: 1 }}>
+        <TouchableOpacity
+          onPress={handlePress}
+          style={{
+            // borderWidth: 1,
+            flex: 1,
+          }}
+        >
+          <Text style={{ color: '#565657' }}>{value}</Text>
+          <AntDesign
+            style={{ position: 'absolute', right: 10 }}
+            name='right'
+            size={16}
+            color='black'
+          />
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
 
-const MatchingFilters = () => {
+const MatchingFilters = ({ navigation }) => {
+  const handlePress = () => {
+    navigation.navigate('SettingsMultipleOptionsScreen')
+  }
+
   return (
     <View>
       <Text style={styles.profileHeader}>Matching filters</Text>
@@ -49,7 +73,11 @@ const MatchingFilters = () => {
         <Divider />
         <SettingsInput label={'Gender'} value={'Man'} canEdit={false} />
         <Divider />
-        <SettingsInputMultipleChoice label={'Interested in'} value={`Women`} />
+        <SettingsInputMultipleChoice
+          handlePress={handlePress}
+          label={'Interested in'}
+          value={`Women`}
+        />
         <Divider />
         <SettingsInput label={'Height'} value={`5' 10"`} />
         <Divider />
@@ -101,10 +129,10 @@ const AccountSettings = () => {
   )
 }
 
-const MatchingSettings = () => {
+const MatchingSettings = ({ navigation }) => {
   return (
     <ScrollView>
-      <MatchingFilters />
+      <MatchingFilters navigation={navigation} />
       <AccountSettings />
     </ScrollView>
   )
@@ -122,7 +150,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     flexDirection: 'row',
     marginVertical: 15,
-    position: 'relative',
+    width: '100%',
+    flex: 1,
   },
   sectionContainer: {
     backgroundColor: 'white',

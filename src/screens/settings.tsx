@@ -7,6 +7,8 @@ import {
   Button,
   Text,
 } from 'react-native'
+import Constants from 'expo-constants'
+
 import { Input, Icon, Slider, ListItem, Divider, Overlay } from '@rneui/themed'
 import { MaterialIcons } from '@expo/vector-icons'
 import { Dimensions } from 'react-native'
@@ -35,29 +37,16 @@ const images = [
   },
 ]
 
-const linkItems = [
-  {
-    title: 'How to grow your own candy',
-  },
-  {
-    title: 'Miley Cryus live at the Grand Fox stadium',
-  },
-  {
-    title: 'Best deals of 2023 on Amazon',
-  },
-  {
-    title:
-      'Blender hacks for Blender 3.2. How to model like a pro and get your work noticed by the top VFX studios',
-  },
-  {
-    title: 'Halo 2: behind the scenes with the studio',
-  },
-]
-
-const MatchingSettingsScreen = ({ navigation }) => {
+const SettingsOptionsScreens = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Text>Matching settings</Text>
+    <View
+      style={
+        {
+          // paddingTop: Constants.statusBarHeight,
+        }
+      }
+    >
+      <Text>Options</Text>
     </View>
   )
 }
@@ -101,8 +90,6 @@ const MainSettingsScreen = ({ navigation }) => {
                     }}
                     onPress={() => navigation.navigate('Profile')}
                   >
-                    {/* <AntDesign name='edit' size={14} color='#007AFF' /> */}
-
                     <Text style={{ color: '#007AFF', fontSize: 14 }}>Edit</Text>
                   </TouchableOpacity>
                 )
@@ -136,6 +123,27 @@ const MainSettingsScreen = ({ navigation }) => {
           }}
           name='Profile'
           component={AccountSettings}
+        />
+        <Stack.Screen
+          options={({ navigation }) => {
+            return {
+              headerTitle: '',
+              headerLeft: () => {
+                return (
+                  <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <AntDesign
+                      style={{ paddingHorizontal: 10 }}
+                      name='left'
+                      size={16}
+                      color='#007AFF'
+                    />
+                  </TouchableOpacity>
+                )
+              },
+            }
+          }}
+          name='SettingsMultipleOptionsScreen'
+          component={SettingsOptionsScreens}
         />
       </Stack.Group>
     </Stack.Navigator>
