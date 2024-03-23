@@ -1,16 +1,6 @@
 import { Divider } from '@rneui/base'
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  ScrollView,
-  Touchable,
-  TouchableWithoutFeedback,
-} from 'react-native'
-import { MaterialIcons } from '@expo/vector-icons'
+import { View, Text, StyleSheet, TextInput, ScrollView } from 'react-native'
 
-import { Entypo } from '@expo/vector-icons'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { FontAwesome } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
@@ -57,14 +47,14 @@ const SettingsInputMultipleChoice = ({ label, value, handlePress }) => {
   )
 }
 
-const MatchingFilters = ({ navigation }) => {
+const ProfileSettings = ({ navigation }) => {
   const handlePress = () => {
     navigation.navigate('SettingsMultipleOptionsScreen', {})
   }
 
   return (
-    <View>
-      <Text style={styles.profileHeader}>Matching filters</Text>
+    <View style={styles.settingsContainer}>
+      <Text style={styles.profileHeader}>Profile</Text>
       <View style={styles.sectionContainer}>
         <Divider />
         <SettingsInput label={'Age'} value={'29'} canEdit={false} />
@@ -72,12 +62,7 @@ const MatchingFilters = ({ navigation }) => {
         <SettingsInput label={'Name'} value={'Matt'} canEdit={false} />
         <Divider />
         <SettingsInput label={'Gender'} value={'Man'} canEdit={false} />
-        <Divider />
-        <SettingsInputMultipleChoice
-          handlePress={handlePress}
-          label={'Interested in'}
-          value={`Women`}
-        />
+
         <Divider />
         <SettingsInput label={'Height'} value={`5' 10"`} />
         <Divider />
@@ -110,9 +95,36 @@ const MatchingFilters = ({ navigation }) => {
   )
 }
 
+const Preferences = ({ navigation }) => {
+  const handlePress = () => {
+    navigation.navigate('SettingsMultipleOptionsScreen', {})
+  }
+
+  return (
+    <View style={styles.settingsContainer}>
+      <Text style={styles.profileHeader}>Preferences</Text>
+      <View style={styles.sectionContainer}>
+        <Divider />
+        <SettingsInputMultipleChoice
+          handlePress={handlePress}
+          label={'Interested in'}
+          value={`Women`}
+        />
+        <Divider />
+        <SettingsInputMultipleChoice
+          handlePress={handlePress}
+          label={'Age'}
+          value={`21 to 24`}
+        />
+        <Divider />
+      </View>
+    </View>
+  )
+}
+
 const AccountSettings = () => {
   return (
-    <View>
+    <View style={styles.settingsContainer}>
       <Text style={styles.profileHeader}>Account settings</Text>
       <View style={styles.sectionContainer}>
         <Divider />
@@ -132,7 +144,8 @@ const AccountSettings = () => {
 const MatchingSettings = ({ navigation }) => {
   return (
     <ScrollView>
-      <MatchingFilters navigation={navigation} />
+      <ProfileSettings navigation={navigation} />
+      <Preferences navigation={navigation} />
       <AccountSettings />
     </ScrollView>
   )
@@ -145,6 +158,9 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     paddingHorizontal: 10,
     color: '#565657',
+  },
+  settingsContainer: {
+    marginTop: 10,
   },
   textInput: {
     paddingHorizontal: 10,
