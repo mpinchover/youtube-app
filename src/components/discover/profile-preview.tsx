@@ -90,15 +90,12 @@ const ProfileDrugs = () => {
     <View style={styles.similarVideos}>
       <Text style={[styles.profileHeader, { marginBottom: 10 }]}>Drugs</Text>
       <View style={[styles.drugs]}>
-        <FontAwesome5 name='canadian-maple-leaf' size={24} color='darkgreen' />
-        <MaterialCommunityIcons name='mushroom' size={24} color='red' />
-        <Entypo name='500px-with-circle' size={24} color='pink' />
-        {/* <MaterialCommunityIcons name='pill' size={24} color='orange' /> */}
-        {/* <MaterialCommunityIcons name='wallpaper' size={24} color='black' />
-        <AntDesign name='minussquareo' size={24} color='black' /> */}
-        <Entypo name='documents' size={24} color='darkblue' />
-        <FontAwesome name='coffee' size={24} color='black' />
-        <FontAwesome5 name='beer' size={24} color='lightsalmon' />
+        <FontAwesome5 name='canadian-maple-leaf' size={24} color='#565657' />
+        <MaterialCommunityIcons name='mushroom' size={24} color='#565657' />
+        <Entypo name='500px-with-circle' size={24} color='#565657' />
+        <Entypo name='documents' size={24} color='#565657' />
+        <FontAwesome name='coffee' size={24} color='#565657' />
+        <FontAwesome5 name='beer' size={24} color='#565657' />
       </View>
     </View>
   )

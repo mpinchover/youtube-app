@@ -101,9 +101,9 @@ const MainSettingsScreen = ({ navigation }) => {
                     }}
                     onPress={() => navigation.navigate('Profile')}
                   >
-                    <AntDesign name='edit' size={20} color='#007AFF' />
+                    {/* <AntDesign name='edit' size={14} color='#007AFF' /> */}
 
-                    <Text style={{ color: '#007AFF', fontSize: 18 }}>Edit</Text>
+                    <Text style={{ color: '#007AFF', fontSize: 14 }}>Edit</Text>
                   </TouchableOpacity>
                 )
               },
@@ -111,7 +111,32 @@ const MainSettingsScreen = ({ navigation }) => {
           }}
           component={ProfilePreviewScreen}
         />
-        <Stack.Screen name='Profile' component={AccountSettings} />
+        <Stack.Screen
+          options={({ navigation }) => {
+            return {
+              headerLeft: () => {
+                return null
+              },
+              headerRight: () => {
+                return (
+                  <TouchableOpacity
+                    style={{
+                      flexDirection: 'row',
+                      gap: 5,
+                      paddingHorizontal: 10,
+                      alignItems: 'center',
+                    }}
+                    onPress={() => navigation.goBack()}
+                  >
+                    <Text style={{ color: '#007AFF', fontSize: 14 }}>Done</Text>
+                  </TouchableOpacity>
+                )
+              },
+            }
+          }}
+          name='Profile'
+          component={AccountSettings}
+        />
       </Stack.Group>
     </Stack.Navigator>
   )

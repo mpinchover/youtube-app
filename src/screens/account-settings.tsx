@@ -45,6 +45,8 @@ const MatchingFilters = () => {
         <Divider />
         <SettingsInput label={'Age'} value={'29'} canEdit={false} />
         <Divider />
+        <SettingsInput label={'Name'} value={'Matt'} canEdit={false} />
+        <Divider />
         <SettingsInput label={'Gender'} value={'Man'} canEdit={false} />
         <Divider />
         <SettingsInputMultipleChoice label={'Interested in'} value={`Women`} />
