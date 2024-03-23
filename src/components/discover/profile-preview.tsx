@@ -29,7 +29,7 @@ const YoutubeItem = ({ title }) => {
         style={{ marginRight: 5 }}
         name='youtube'
         size={24}
-        color='red'
+        color='#565657'
       />
       <Text style={{ fontSize: 14, color: '#565657' }}>{title}</Text>
     </TouchableOpacity>
