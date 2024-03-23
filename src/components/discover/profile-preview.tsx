@@ -92,7 +92,8 @@ const ProfileDrugs = () => {
       <View style={[styles.drugs]}>
         <FontAwesome5 name='canadian-maple-leaf' size={24} color='darkgreen' />
         <MaterialCommunityIcons name='mushroom' size={24} color='red' />
-        <MaterialCommunityIcons name='pill' size={24} color='orange' />
+        <Entypo name='500px-with-circle' size={24} color='pink' />
+        {/* <MaterialCommunityIcons name='pill' size={24} color='orange' /> */}
         {/* <MaterialCommunityIcons name='wallpaper' size={24} color='black' />
         <AntDesign name='minussquareo' size={24} color='black' /> */}
         <Entypo name='documents' size={24} color='darkblue' />
