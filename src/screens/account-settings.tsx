@@ -59,7 +59,7 @@ const SettingsInputMultipleChoice = ({ label, value, handlePress }) => {
 
 const MatchingFilters = ({ navigation }) => {
   const handlePress = () => {
-    navigation.navigate('SettingsMultipleOptionsScreen')
+    navigation.navigate('SettingsMultipleOptionsScreen', {})
   }
 
   return (
