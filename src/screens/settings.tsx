@@ -46,7 +46,86 @@ const SettingsOptionsScreens = ({ navigation }) => {
         }
       }
     >
-      <Text>Options</Text>
+      <Text
+        style={{
+          color: '#565657',
+          fontSize: 24,
+          paddingHorizontal: 10,
+          marginVertical: 20,
+        }}
+      >
+        Who are you looking to meet?
+      </Text>
+      <Divider />
+      <TouchableOpacity
+        style={{
+          width: '100%',
+          paddingHorizontal: 10,
+          paddingVertical: 20,
+          justifyContent: 'space-between',
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}
+      >
+        <Text style={{ color: '#565657', fontSize: 16 }}>Women</Text>
+        <View
+          style={{
+            borderColor: '#565657',
+            borderWidth: 1,
+            width: 20,
+            height: 20,
+            borderRadius: 50,
+            backgroundColor: '#565657',
+          }}
+        ></View>
+      </TouchableOpacity>
+      <Divider />
+      <TouchableOpacity
+        style={{
+          width: '100%',
+          paddingHorizontal: 10,
+          paddingVertical: 20,
+          justifyContent: 'space-between',
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}
+      >
+        <Text style={{ color: '#565657', fontSize: 16 }}>Men</Text>
+        <View
+          style={{
+            borderColor: 'lightgrey',
+            borderWidth: 1,
+            width: 20,
+            height: 20,
+            borderRadius: 50,
+            backgroundColor: 'lightgrey',
+          }}
+        ></View>
+      </TouchableOpacity>
+      <Divider />
+      <TouchableOpacity
+        style={{
+          width: '100%',
+          paddingHorizontal: 10,
+          paddingVertical: 20,
+          justifyContent: 'space-between',
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}
+      >
+        <Text style={{ color: '#565657', fontSize: 16 }}>Everyone</Text>
+        <View
+          style={{
+            borderColor: 'lightgrey',
+            borderWidth: 1,
+            width: 20,
+            height: 20,
+            borderRadius: 50,
+            backgroundColor: 'lightgrey',
+          }}
+        ></View>
+      </TouchableOpacity>
+      <Divider />
     </View>
   )
 }
