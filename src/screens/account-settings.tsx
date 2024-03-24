@@ -48,8 +48,8 @@ const SettingsInputMultipleChoice = ({ label, value, handlePress }) => {
 }
 
 const ProfileSettings = ({ navigation }) => {
-  const handlePress = () => {
-    navigation.navigate('SettingsMultipleOptionsScreen', {})
+  const handlePress = (screen) => {
+    navigation.navigate(screen, {})
   }
 
   return (
@@ -70,7 +70,10 @@ const ProfileSettings = ({ navigation }) => {
         <Divider />
         <SettingsInput label={'Location'} value={`New York, NY, US`} />
         <Divider />
-        <View style={styles.textInput}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Medicines')}
+          style={styles.textInput}
+        >
           <Text style={styles.textLabel}> Drugs</Text>
           <View style={{ flexDirection: 'row', gap: 10 }}>
             <FontAwesome5
@@ -88,7 +91,7 @@ const ProfileSettings = ({ navigation }) => {
             size={16}
             color='black'
           />
-        </View>
+        </TouchableOpacity>
         <Divider />
       </View>
     </View>
@@ -96,8 +99,8 @@ const ProfileSettings = ({ navigation }) => {
 }
 
 const Preferences = ({ navigation }) => {
-  const handlePress = () => {
-    navigation.navigate('SettingsMultipleOptionsScreen', {})
+  const handlePress = (screen) => {
+    navigation.navigate(screen, {})
   }
 
   return (
@@ -106,13 +109,13 @@ const Preferences = ({ navigation }) => {
       <View style={styles.sectionContainer}>
         <Divider />
         <SettingsInputMultipleChoice
-          handlePress={handlePress}
+          handlePress={() => handlePress('InterestedIn')}
           label={'Interested in'}
           value={`Women`}
         />
         <Divider />
         <SettingsInputMultipleChoice
-          handlePress={handlePress}
+          handlePress={() => handlePress('Age')}
           label={'Age'}
           value={`21 to 24`}
         />
