@@ -85,21 +85,21 @@ const InfoHeader = () => {
   )
 }
 
-const ProfileDrugs = () => {
-  return (
-    <View style={styles.similarVideos}>
-      <Text style={[styles.profileHeader, { marginBottom: 10 }]}>Drugs</Text>
-      <View style={[styles.drugs]}>
-        <FontAwesome5 name='canadian-maple-leaf' size={24} color='#565657' />
-        <MaterialCommunityIcons name='mushroom' size={24} color='#565657' />
-        <Entypo name='500px-with-circle' size={24} color='#565657' />
-        <Entypo name='documents' size={24} color='#565657' />
-        <FontAwesome name='coffee' size={24} color='#565657' />
-        <FontAwesome5 name='beer' size={24} color='#565657' />
-      </View>
-    </View>
-  )
-}
+// const ProfileM = () => {
+//   return (
+//     <View style={styles.similarVideos}>
+//       <Text style={[styles.profileHeader, { marginBottom: 10 }]}>M</Text>
+//       <View style={[styles.m]}>
+//         <FontAwesome5 name='canadian-maple-leaf' size={24} color='#565657' />
+//         <MaterialCommunityIcons name='mushroom' size={24} color='#565657' />
+//         <Entypo name='500px-with-circle' size={24} color='#565657' />
+//         <Entypo name='documents' size={24} color='#565657' />
+//         <FontAwesome name='coffee' size={24} color='#565657' />
+//         <FontAwesome5 name='beer' size={24} color='#565657' />
+//       </View>
+//     </View>
+//   )
+// }
 
 const ProfilePreview = ({ navigation, next, images, previewMode = false }) => {
   return (
@@ -148,7 +148,7 @@ const ProfilePreview = ({ navigation, next, images, previewMode = false }) => {
         </View>
         <Divider />
 
-        <ProfileDrugs />
+        {/* <ProfileM /> */}
 
         <View style={{ height: 150, backgroundColor: 'white' }}></View>
       </ScrollView>
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
   similarVideos: {
     marginVertical: 15,
   },
-  drugs: {
+  m: {
     paddingHorizontal: 10,
     flexDirection: 'row',
     gap: 20,

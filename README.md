@@ -25,3 +25,5 @@ Stack
 Use mongo probably for user profile and dating preferences
 
 Have an extra screen for settings
+
+Keyboard: shift + cmd + k or cmd + k to make it appear.

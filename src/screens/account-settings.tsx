@@ -70,11 +70,11 @@ const ProfileSettings = ({ navigation }) => {
         <Divider />
         <SettingsInput label={'Location'} value={`New York, NY, US`} />
         <Divider />
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => navigation.navigate('Medicines')}
           style={styles.textInput}
         >
-          <Text style={styles.textLabel}> Drugs</Text>
+          <Text style={styles.textLabel}> M</Text>
           <View style={{ flexDirection: 'row', gap: 10 }}>
             <FontAwesome5
               name='canadian-maple-leaf'
@@ -91,7 +91,7 @@ const ProfileSettings = ({ navigation }) => {
             size={16}
             color='black'
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <Divider />
       </View>
     </View>
