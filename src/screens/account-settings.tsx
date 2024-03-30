@@ -9,7 +9,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const SettingsInput = ({ label, value, canEdit = true }) => {
   return (
-    <View style={styles.textInput}>
+    <View style={[styles.textInput, { marginVertical: 15 }]}>
       <Text style={styles.textLabel}> {label} </Text>
       <TextInput
         style={{ color: canEdit ? '#565657' : 'lightgrey' }}
@@ -31,12 +31,13 @@ const SettingsInputMultipleChoice = ({ label, value, handlePress }) => {
           onPress={handlePress}
           style={{
             // borderWidth: 1,
+            paddingVertical: 15,
             flex: 1,
           }}
         >
           <Text style={{ color: '#565657' }}>{value}</Text>
           <AntDesign
-            style={{ position: 'absolute', right: 10 }}
+            style={{ position: 'absolute', right: 10, top: 15 }}
             name='right'
             size={16}
             color='black'
@@ -70,28 +71,6 @@ const ProfileSettings = ({ navigation }) => {
         <Divider />
         <SettingsInput label={'Location'} value={`New York, NY, US`} />
         <Divider />
-        {/* <TouchableOpacity
-          onPress={() => navigation.navigate('Medicines')}
-          style={styles.textInput}
-        >
-          <Text style={styles.textLabel}> M</Text>
-          <View style={{ flexDirection: 'row', gap: 10 }}>
-            <FontAwesome5
-              name='canadian-maple-leaf'
-              size={16}
-              color='#565657'
-            />
-            <MaterialCommunityIcons name='mushroom' size={16} color='#565657' />
-            <FontAwesome name='coffee' size={16} color='#565657' />
-            <FontAwesome5 name='beer' size={16} color='#565657' />
-          </View>
-          <AntDesign
-            style={{ position: 'absolute', right: 10 }}
-            name='right'
-            size={16}
-            color='black'
-          />
-        </TouchableOpacity> */}
         <Divider />
       </View>
     </View>
@@ -131,11 +110,23 @@ const AccountSettings = () => {
       <Text style={styles.profileHeader}>Account settings</Text>
       <View style={styles.sectionContainer}>
         <Divider />
-        <SettingsInput label={'Email'} value={'test@gmail.com'} />
+        <SettingsInputMultipleChoice
+          handlePress={() => {}}
+          label={'Email'}
+          value={'test@gmail.com'}
+        />
         <Divider />
-        <SettingsInput label={'Password'} value={'*******'} />
+        <SettingsInputMultipleChoice
+          handlePress={() => {}}
+          label={'Password'}
+          value={'*******'}
+        />
         <Divider />
-        <SettingsInput label={'Mobile'} value={'+1 (860) 888-8888'} />
+        <SettingsInputMultipleChoice
+          handlePress={() => {}}
+          label={'Mobile'}
+          value={'+1 (860) 888-8888'}
+        />
         <Divider />
 
         <Divider />
@@ -168,8 +159,9 @@ const styles = StyleSheet.create({
   textInput: {
     paddingHorizontal: 10,
     flexDirection: 'row',
-    marginVertical: 15,
+    // marginVertical: 15,
     width: '100%',
+    alignItems: 'center',
     flex: 1,
   },
   sectionContainer: {

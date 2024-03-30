@@ -10,6 +10,15 @@ export const interestedInState = atom({
   key: 'interestedInState',
   default: 'women',
 })
+export const ageMinState = atom({
+  key: 'ageMinState',
+  default: 18,
+})
+
+export const ageMaxState = atom({
+  key: 'ageMaxState',
+  default: 100,
+})
 
 // export const setInterestedIn = selector({
 //   key: 'matchingCandidatesState',
