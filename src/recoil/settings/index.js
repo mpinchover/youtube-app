@@ -20,6 +20,11 @@ export const ageMaxState = atom({
   default: 100,
 })
 
+export const mobileState = atom({
+  key: 'mobileState',
+  default: '',
+})
+
 // export const setInterestedIn = selector({
 //   key: 'matchingCandidatesState',
 //   get: ({ get }) => {

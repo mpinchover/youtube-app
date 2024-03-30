@@ -8,33 +8,28 @@ import {
 } from 'react-native'
 import { Divider } from '@rneui/base'
 import { useRecoilState } from 'recoil'
-import { mobileState } from '../../recoil/settings'
+import { ageMinState, ageMaxState } from '../../recoil/settings'
 import MultiSlider from '@ptomasroos/react-native-multi-slider'
 import { Dimensions } from 'react-native'
 import { useState } from 'react'
 
-const Mobile = ({ navigation }) => {
-  const [mobile, setMobile] = useState('')
+const Mobile = ({ navigation, route }) => {
+  const [ageMin, setAgeMin] = useRecoilState(ageMinState)
+  const [ageMax, setAgeMax] = useRecoilState(ageMaxState)
+
+  const { mobile } = route.params
 
   return (
     <View style={{ flex: 1, paddingHorizontal: 10, backgroundColor: 'white' }}>
-      <Text style={styles.header}>What's your new number?</Text>
+      <Text style={styles.header}>Enter the code sent to {mobile} </Text>
       <Divider />
 
       <View style={{ marginTop: 20, position: 'relative' }}>
-        <TextInput
-          value={mobile}
-          onChangeText={setMobile}
-          style={styles.textInput}
-          placeholder='(888) 888 - 8888'
-        />
-        <Text style={styles.label}>Phone number</Text>
+        <TextInput style={styles.textInput} placeholder='' />
+        <Text style={styles.label}>SMS code</Text>
       </View>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('MobileValidate', { mobile })}
-        style={styles.button}
-      >
-        <Text style={{ textAlign: 'center', color: 'white' }}>Send code</Text>
+      <TouchableOpacity style={styles.button}>
+        <Text style={{ textAlign: 'center', color: 'white' }}>Submit</Text>
       </TouchableOpacity>
     </View>
   )

@@ -6,6 +6,8 @@ import {
   FlatList,
   Button,
   Text,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native'
 import Constants from 'expo-constants'
 
@@ -30,11 +32,13 @@ import {
   profileScreenConfig,
   profilePreviewScreenConfig,
   optionsScreenConfig,
+  optionsScreenMobileValidationConfig,
 } from './screen-configurations'
 import Age from './age'
 import Medicines from './medicines'
 import Email from './email'
 import Mobile from './mobile'
+import MobileValidate from './mobile-validate'
 
 const images = [
   {
@@ -51,18 +55,22 @@ const images = [
 const ProfilePreviewScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <ProfilePreview
-        navigation={navigation}
-        images={images}
-        next={() => {}}
-        previewMode={true}
-      />
-      <Button
-        title='press me'
-        onPress={() => {
-          navigation.navigate('MyModal')
-        }}
-      />
+      <KeyboardAvoidingView
+        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+      >
+        <ProfilePreview
+          navigation={navigation}
+          images={images}
+          next={() => {}}
+          previewMode={true}
+        />
+        <Button
+          title='press me'
+          onPress={() => {
+            navigation.navigate('MyModal')
+          }}
+        />
+      </KeyboardAvoidingView>
     </View>
   )
 }
@@ -103,6 +111,12 @@ const MainSettingsScreen = ({ navigation }) => {
           options={optionsScreenConfig}
           name='Mobile'
           component={Mobile}
+        />
+
+        <Stack.Screen
+          options={optionsScreenMobileValidationConfig}
+          name='MobileValidate'
+          component={MobileValidate}
         />
 
         <Stack.Screen

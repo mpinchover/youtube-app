@@ -1,5 +1,13 @@
 import { Divider } from '@rneui/base'
-import { View, Text, StyleSheet, TextInput, ScrollView } from 'react-native'
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native'
 
 import { FontAwesome5 } from '@expo/vector-icons'
 import { FontAwesome } from '@expo/vector-icons'
@@ -107,13 +115,16 @@ const Preferences = ({ navigation }) => {
 const AccountSettings = ({ navigation }) => {
   return (
     <View style={styles.settingsContainer}>
+      {/* <KeyboardAvoidingView
+        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+      > */}
       <Text style={styles.profileHeader}>Account settings</Text>
       <View style={styles.sectionContainer}>
         <Divider />
-        <SettingsInputMultipleChoice
-          handlePress={() => {
-            navigation.navigate('Email')
-          }}
+        <SettingsInput
+          // handlePress={() => {
+          //   navigation.navigate('Email')
+          // }}
           label={'Email'}
           value={'test@gmail.com'}
         />
@@ -135,17 +146,25 @@ const AccountSettings = ({ navigation }) => {
 
         <Divider />
       </View>
+      {/* </KeyboardAvoidingView> */}
     </View>
   )
 }
 
 const MatchingSettings = ({ navigation }) => {
   return (
-    <ScrollView>
-      <ProfileSettings navigation={navigation} />
-      <Preferences navigation={navigation} />
-      <AccountSettings navigation={navigation} />
-    </ScrollView>
+    <KeyboardAvoidingView
+      // behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      behavior='position'
+      style={{ flex: 1 }}
+      keyboardVerticalOffset={100}
+    >
+      <ScrollView>
+        <ProfileSettings navigation={navigation} />
+        <Preferences navigation={navigation} />
+        <AccountSettings navigation={navigation} />
+      </ScrollView>
+    </KeyboardAvoidingView>
   )
 }
 

@@ -18,6 +18,26 @@ export const optionsScreenConfig = ({ navigation }) => {
   }
 }
 
+export const optionsScreenMobileValidationConfig = ({ navigation }) => {
+  return {
+    headerTitle: '',
+    headerLeft: () => {
+      return (
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Profile preview')}
+        >
+          <AntDesign
+            style={{ paddingHorizontal: 10 }}
+            name='left'
+            size={16}
+            color='#007AFF'
+          />
+        </TouchableOpacity>
+      )
+    },
+  }
+}
+
 export const profileScreenConfig = ({ navigation }) => {
   return {
     headerLeft: () => {
