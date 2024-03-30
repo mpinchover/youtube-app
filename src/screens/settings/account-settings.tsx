@@ -115,9 +115,6 @@ const Preferences = ({ navigation }) => {
 const AccountSettings = ({ navigation }) => {
   return (
     <View style={styles.settingsContainer}>
-      {/* <KeyboardAvoidingView
-        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
-      > */}
       <Text style={styles.profileHeader}>Account settings</Text>
       <View style={styles.sectionContainer}>
         <Divider />
@@ -146,7 +143,6 @@ const AccountSettings = ({ navigation }) => {
 
         <Divider />
       </View>
-      {/* </KeyboardAvoidingView> */}
     </View>
   )
 }

@@ -53,24 +53,26 @@ const images = [
 ]
 
 const ProfilePreviewScreen = ({ navigation }) => {
+  const [index, setIndex] = useState(0)
+
   return (
     <View style={styles.container}>
-      <KeyboardAvoidingView
+      {/* <KeyboardAvoidingView
         behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
-      >
-        <ProfilePreview
-          navigation={navigation}
-          images={images}
-          next={() => {}}
-          previewMode={true}
-        />
-        <Button
-          title='press me'
-          onPress={() => {
-            navigation.navigate('MyModal')
-          }}
-        />
-      </KeyboardAvoidingView>
+      > */}
+      <ProfilePreview
+        navigation={navigation}
+        images={images}
+        next={() => {}}
+        previewMode={true}
+      />
+      <Button
+        title='press me'
+        onPress={() => {
+          navigation.navigate('MyModal')
+        }}
+      />
+      {/* </KeyboardAvoidingView> */}
     </View>
   )
 }
