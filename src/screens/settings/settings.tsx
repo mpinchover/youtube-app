@@ -24,7 +24,7 @@ import axios from 'axios'
 import UploadYoutubeDialogBox from '../../components/upload-youtube-dialog-box'
 import { createStackNavigator } from '@react-navigation/stack'
 import ProfilePreview from '../../components/discover/profile-preview'
-import AccountSettings from '../account-settings'
+import AccountSettings from './account-settings'
 import InterestedIn from './interested-in'
 import {
   profileScreenConfig,
@@ -33,6 +33,8 @@ import {
 } from './screen-configurations'
 import Age from './age'
 import Medicines from './medicines'
+import Email from './email'
+import Mobile from './mobile'
 
 const images = [
   {
@@ -91,6 +93,18 @@ const MainSettingsScreen = ({ navigation }) => {
           name='Age'
           component={Age}
         />
+        <Stack.Screen
+          options={optionsScreenConfig}
+          name='Email'
+          component={Email}
+        />
+
+        <Stack.Screen
+          options={optionsScreenConfig}
+          name='Mobile'
+          component={Mobile}
+        />
+
         <Stack.Screen
           options={optionsScreenConfig}
           name='Medicines'

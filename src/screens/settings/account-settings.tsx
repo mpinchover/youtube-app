@@ -104,26 +104,30 @@ const Preferences = ({ navigation }) => {
   )
 }
 
-const AccountSettings = () => {
+const AccountSettings = ({ navigation }) => {
   return (
     <View style={styles.settingsContainer}>
       <Text style={styles.profileHeader}>Account settings</Text>
       <View style={styles.sectionContainer}>
         <Divider />
         <SettingsInputMultipleChoice
-          handlePress={() => {}}
+          handlePress={() => {
+            navigation.navigate('Email')
+          }}
           label={'Email'}
           value={'test@gmail.com'}
         />
         <Divider />
-        <SettingsInputMultipleChoice
+        {/* <SettingsInputMultipleChoice
           handlePress={() => {}}
           label={'Password'}
           value={'*******'}
-        />
-        <Divider />
+        /> */}
+        {/* <Divider /> */}
         <SettingsInputMultipleChoice
-          handlePress={() => {}}
+          handlePress={() => {
+            navigation.navigate('Mobile')
+          }}
           label={'Mobile'}
           value={'+1 (860) 888-8888'}
         />
@@ -140,7 +144,7 @@ const MatchingSettings = ({ navigation }) => {
     <ScrollView>
       <ProfileSettings navigation={navigation} />
       <Preferences navigation={navigation} />
-      <AccountSettings />
+      <AccountSettings navigation={navigation} />
     </ScrollView>
   )
 }
