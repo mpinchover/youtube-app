@@ -8,12 +8,13 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native'
-
+import { Tab } from '@rneui/themed'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { FontAwesome } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { useState } from 'react'
 
 const SettingsInput = ({ label, value, canEdit = true }) => {
   return (

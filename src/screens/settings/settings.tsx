@@ -6,7 +6,6 @@ import {
   FlatList,
   Button,
   Text,
-  KeyboardAvoidingView,
   Platform,
 } from 'react-native'
 import Constants from 'expo-constants'
@@ -39,6 +38,7 @@ import Medicines from './medicines'
 import Email from './email'
 import Mobile from './mobile'
 import MobileValidate from './mobile-validate'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 const images = [
   {
@@ -57,9 +57,6 @@ const ProfilePreviewScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      {/* <KeyboardAvoidingView
-        behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
-      > */}
       <ProfilePreview
         navigation={navigation}
         images={images}
@@ -72,7 +69,6 @@ const ProfilePreviewScreen = ({ navigation }) => {
           navigation.navigate('MyModal')
         }}
       />
-      {/* </KeyboardAvoidingView> */}
     </View>
   )
 }
@@ -128,6 +124,28 @@ const MainSettingsScreen = ({ navigation }) => {
         />
       </Stack.Group>
     </Stack.Navigator>
+  )
+}
+
+const Tab = createBottomTabNavigator()
+
+const MainSettings = () => {
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => {
+        return {
+          tabBarStyle: { display: 'none' },
+        }
+      }}
+    >
+      <Tab.Screen
+        options={{
+          headerShown: false,
+        }}
+        name='Discover'
+        component={MainSettingsScreen}
+      />
+    </Tab.Navigator>
   )
 }
 
