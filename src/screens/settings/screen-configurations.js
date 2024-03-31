@@ -1,5 +1,7 @@
-import { TouchableOpacity, Text } from 'react-native'
+import { TouchableOpacity, Text, View } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
+import { useState } from 'react'
+
 export const optionsScreenConfig = ({ navigation }) => {
   return {
     headerTitle: '',
@@ -38,8 +40,9 @@ export const optionsScreenMobileValidationConfig = ({ navigation }) => {
   }
 }
 
-export const profileScreenConfig = ({ navigation }) => {
+export const profileSettingsTabsScreenConfig = ({ navigation }) => {
   return {
+    headerShadowVisible: false, // applied her
     headerLeft: () => {
       return null
     },
@@ -72,7 +75,7 @@ export const profilePreviewScreenConfig = ({ navigation }) => {
             paddingHorizontal: 10,
             alignItems: 'center',
           }}
-          onPress={() => navigation.navigate('Profile')}
+          onPress={() => navigation.navigate('ProfileSettingsTabs')}
         >
           <Text style={{ color: '#007AFF', fontSize: 14 }}>Edit</Text>
         </TouchableOpacity>

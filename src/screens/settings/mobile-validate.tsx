@@ -9,9 +9,6 @@ import {
 import { Divider } from '@rneui/base'
 import { useRecoilState } from 'recoil'
 import { ageMinState, ageMaxState } from '../../recoil/settings'
-import MultiSlider from '@ptomasroos/react-native-multi-slider'
-import { Dimensions } from 'react-native'
-import { useState } from 'react'
 
 const Mobile = ({ navigation, route }) => {
   const [ageMin, setAgeMin] = useRecoilState(ageMinState)

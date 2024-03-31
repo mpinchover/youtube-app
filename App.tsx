@@ -2,13 +2,7 @@ import { StatusBar } from 'expo-status-bar'
 import 'react-native-gesture-handler'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
-import {
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native'
+import { Platform, StyleSheet, Text, View } from 'react-native'
 import * as React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { Entypo, FontAwesome } from '@expo/vector-icons'
@@ -137,7 +131,6 @@ const MainScreens = () => {
             return icon
           },
           headerShown: false,
-          // tabBarShowLabel: false,
         }
       }}
     >

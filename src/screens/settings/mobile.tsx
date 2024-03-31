@@ -7,10 +7,6 @@ import {
   Button,
 } from 'react-native'
 import { Divider } from '@rneui/base'
-import { useRecoilState } from 'recoil'
-import { mobileState } from '../../recoil/settings'
-import MultiSlider from '@ptomasroos/react-native-multi-slider'
-import { Dimensions } from 'react-native'
 import { useState } from 'react'
 
 const Mobile = ({ navigation }) => {

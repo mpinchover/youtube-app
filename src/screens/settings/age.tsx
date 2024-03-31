@@ -20,23 +20,18 @@ const Age = ({ navigation }) => {
           <Text style={styles.optionLabel}>to</Text>
           <Text style={styles.optionLabel}>{ageMax}</Text>
         </View>
-        {/* <View style={{ width: '100%' }}> */}
         <MultiSlider
-          // containerStyle={{ borderWidth: 1, width: '100%' }}
           values={[ageMin, ageMax]}
           sliderLength={Dimensions.get('window').width - 60}
           step={1}
           max={100}
           min={4}
           snapped={true}
-          // onValuesChangeStart={sliderOneValuesChangeStart}
           onValuesChange={(values) => {
             setAgeMin(values[0])
             setAgeMax(values[1])
           }}
-          // onValuesChangeFinish={sliderOneValuesChangeFinish}
         />
-        {/* </View> */}
       </View>
     </View>
   )

@@ -1,24 +1,28 @@
 import { Divider } from '@rneui/base'
+import { SettingsInputMultipleChoice } from './common'
 import { View, Text, StyleSheet } from 'react-native'
-import { SettingsInput, SettingsInputMultipleChoice } from './common'
 
-const AccountSettings = ({ navigation }) => {
+const Preferences = ({ navigation }) => {
+  const handlePress = (screen) => {
+    navigation.navigate(screen, {})
+  }
+
   return (
     <View style={styles.settingsContainer}>
-      <Text style={styles.profileHeader}>Account settings</Text>
+      <Text style={styles.profileHeader}>Preferences</Text>
       <View style={styles.sectionContainer}>
         <Divider />
-        <SettingsInput label={'Email'} value={'test@gmail.com'} />
-        <Divider />
         <SettingsInputMultipleChoice
-          handlePress={() => {
-            navigation.navigate('Mobile')
-          }}
-          label={'Mobile'}
-          value={'+1 (860) 888-8888'}
+          handlePress={() => handlePress('InterestedIn')}
+          label={'Interested in'}
+          value={`Women`}
         />
         <Divider />
-
+        <SettingsInputMultipleChoice
+          handlePress={() => handlePress('Age')}
+          label={'Age'}
+          value={`21 to 24`}
+        />
         <Divider />
       </View>
     </View>
@@ -52,4 +56,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default AccountSettings
+export default Preferences

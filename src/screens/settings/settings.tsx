@@ -28,9 +28,9 @@ import ProfilePreview from '../../components/discover/profile-preview'
 import AccountSettings from './account-settings'
 import InterestedIn from './interested-in'
 import {
-  profileScreenConfig,
-  profilePreviewScreenConfig,
+  profileSettingsTabsScreenConfig,
   optionsScreenConfig,
+  profilePreviewScreenConfig,
   optionsScreenMobileValidationConfig,
 } from './screen-configurations'
 import Age from './age'
@@ -39,6 +39,7 @@ import Email from './email'
 import Mobile from './mobile'
 import MobileValidate from './mobile-validate'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import ProfileSettingsTabs from './profile-settings'
 
 const images = [
   {
@@ -85,9 +86,9 @@ const MainSettingsScreen = ({ navigation }) => {
           component={ProfilePreviewScreen}
         />
         <Stack.Screen
-          options={profileScreenConfig}
-          name='Profile'
-          component={AccountSettings}
+          options={profileSettingsTabsScreenConfig}
+          name='ProfileSettingsTabs'
+          component={ProfileSettingsTabs}
         />
         <Stack.Screen
           options={optionsScreenConfig}
@@ -124,28 +125,6 @@ const MainSettingsScreen = ({ navigation }) => {
         />
       </Stack.Group>
     </Stack.Navigator>
-  )
-}
-
-const Tab = createBottomTabNavigator()
-
-const MainSettings = () => {
-  return (
-    <Tab.Navigator
-      screenOptions={({ route }) => {
-        return {
-          tabBarStyle: { display: 'none' },
-        }
-      }}
-    >
-      <Tab.Screen
-        options={{
-          headerShown: false,
-        }}
-        name='Discover'
-        component={MainSettingsScreen}
-      />
-    </Tab.Navigator>
   )
 }
 
