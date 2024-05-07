@@ -25,6 +25,10 @@ export const mobileState = atom({
   default: '',
 })
 
+export const profileSettingsTabState = atom({
+  key:"profileSettingsTabState",
+  default:0,
+})
 // export const setInterestedIn = selector({
 //   key: 'matchingCandidatesState',
 //   get: ({ get }) => {

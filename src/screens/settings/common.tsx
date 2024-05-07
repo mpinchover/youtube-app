@@ -7,6 +7,8 @@ import {
 } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import { useState } from 'react'
+import { useRecoilState } from 'recoil'
+import { profileSettingsTabState } from '../../recoil/settings'
 export const SettingsInput = ({ label, value, canEdit = true }) => {
   return (
     <View style={[styles.textInput, { marginVertical: 15 }]}>
@@ -48,52 +50,7 @@ export const SettingsInputMultipleChoice = ({ label, value, handlePress }) => {
   )
 }
 
-const Tab = ({ label, active = false }) => {
-  return (
-    <TouchableOpacity
-      style={{
-        paddingVertical: 5,
-        paddingHorizontal: 20,
-        // borderWidth:1,
-        borderBottomWidth: active ? 1 : 0,
-        borderBottomColor: '#565657',
-        // width: 100,
-        // backgroundColor: 'lightgrey',
-      }}
-    >
-      <Text
-        style={{
-          //   width: 50,
-          //   borderWidth: 1,
-          color: '#565657',
-          //   textDecorationLine: 'underline',
-        }}
-      >
-        {label}
-      </Text>
-    </TouchableOpacity>
-  )
-}
-export const HeaderTabs = () => {
-  const [index, setIndex] = useState(0)
-  return (
-    <View
-      style={{
-        backgroundColor: 'white',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingVertical: 10,
-        borderRadius: 5,
-        // gap: 10,ss
-      }}
-    >
-      <Tab label='YouTube' active />
-      <Tab label='Pictures' />
-      <Tab label='Profile' />
-    </View>
-  )
-}
+
 
 const styles = StyleSheet.create({
   profileHeader: {
