@@ -32,10 +32,11 @@ const VideoSelection = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10,
+    marginTop: 25,
   },
   videoItem: {
-    padding: 10,
+    paddingVertical: 15,
+    paddingHorizontal: 10,
     backgroundColor: "white",
   },
   channel: {
