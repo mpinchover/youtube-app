@@ -1,11 +1,51 @@
-import { View, Text } from 'react-native'
+import { Divider } from "@rneui/themed";
+import { View, Text, StyleSheet, TextInput } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-const VideoSelection = () => {
+const VideoItem = ({ onPress }) => {
   return (
-    <View>
-      <Text>Video selection</Text>
-    </View>
-  )
-}
+    <TouchableOpacity onPress={onPress} style={styles.videoItem}>
+      <Text style={styles.channel}>Channel ID</Text>
+      <Text style={styles.title}>Description</Text>
+    </TouchableOpacity>
+  );
+};
 
-export default VideoSelection
+const VideoSelection = ({ navigation }) => {
+  const onPress = () => {
+    navigation.navigate("AddVideoLinkScreen");
+  };
+  return (
+    <View style={styles.container}>
+      <Divider />
+      <VideoItem onPress={onPress} />
+      <Divider />
+      <VideoItem onPress={onPress} />
+      <Divider />
+      <VideoItem onPress={onPress} />
+      <Divider />
+      <VideoItem onPress={onPress} />
+      <Divider />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 10,
+  },
+  videoItem: {
+    padding: 10,
+    backgroundColor: "white",
+  },
+  channel: {
+    fontSize: 12,
+    color: "#565657",
+  },
+  title: {
+    marginTop: 10,
+    color: "#565657",
+  },
+});
+
+export default VideoSelection;
