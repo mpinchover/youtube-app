@@ -126,10 +126,19 @@ const MainSettingsScreen = ({ navigation }) => {
           name="Medicines"
           component={Medicines}
         />
+        <Stack.Screen
+          options={optionsScreenConfig}
+          name="AddVideoLinkScreen"
+          component={AddVideoLink}
+        />
       </Stack.Group>
-      <Stack.Group screenOptions={{ presentation: "modal" }}>
-        <Stack.Screen name="AddVideoLinkScreen" component={AddVideoLink} />
-      </Stack.Group>
+      {/* <Stack.Group screenOptions={{ presentation: "modal" }}>
+        <Stack.Screen
+          options={optionsScreenConfig}
+          name="AddVideoLinkScreen"
+          component={AddVideoLink}
+        />
+      </Stack.Group> */}
     </Stack.Navigator>
   );
 };
