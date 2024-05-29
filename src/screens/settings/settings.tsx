@@ -8,6 +8,7 @@ import {
   Text,
   Platform,
   KeyboardAvoidingView,
+  SafeAreaView,
 } from "react-native";
 import Constants from "expo-constants";
 
@@ -81,6 +82,8 @@ const Stack = createStackNavigator();
 
 const MainSettingsScreen = ({ navigation }) => {
   return (
+    // <SafeAreaView style={{ flex: 1, backgroundColor: "#8aa" }}>
+
     <Stack.Navigator>
       <Stack.Group>
         <Stack.Screen

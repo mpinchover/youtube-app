@@ -5,6 +5,7 @@ import {
   ScrollView,
   TouchableOpacity,
   KeyboardAvoidingView,
+  SafeAreaView,
 } from "react-native";
 import PersonalInfo from "./personal-info";
 import Preferences from "./preferences";
@@ -13,14 +14,22 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import VideoSelection from "./video-selection";
 import ImageSelectionGrid from "./image-selection";
 import { ReactElement, useState } from "react";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const ProfileSettings = ({ navigation }) => {
   return (
-    <ScrollView style={{ flex: 1 }}>
+    <KeyboardAwareScrollView
+      keyboardOpeningTime={330}
+      // extraHeight={}
+      contentContainerStyle={{ flexGrow: 1 }}
+    >
       <PersonalInfo navigation={navigation} />
       <Preferences navigation={navigation} />
       <AccountSettings navigation={navigation} />
-    </ScrollView>
+      <AccountSettings navigation={navigation} />
+      <AccountSettings navigation={navigation} />
+      <AccountSettings navigation={navigation} />
+    </KeyboardAwareScrollView>
   );
 };
 

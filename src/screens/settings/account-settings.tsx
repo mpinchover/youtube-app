@@ -1,7 +1,12 @@
 import { Divider } from "@rneui/base";
-import { View, Text, StyleSheet, KeyboardAvoidingView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  KeyboardAvoidingView,
+  SafeAreaView,
+} from "react-native";
 import { SettingsInput, SettingsInputMultipleChoice } from "./common";
-import { ScrollView } from "react-native-gesture-handler";
 
 const AccountSettings = ({ navigation }) => {
   return (
@@ -21,6 +26,10 @@ const AccountSettings = ({ navigation }) => {
         <Divider />
 
         <Divider />
+        {/* <SettingsInput label={"Email"} value={"test@gmail.com"} />
+        <SettingsInput label={"Email"} value={"test@gmail.com"} />
+        <SettingsInput label={"Email"} value={"test@gmail.com"} />
+        <SettingsInput label={"Email"} value={"test@gmail.com"} /> */}
       </View>
     </View>
   );

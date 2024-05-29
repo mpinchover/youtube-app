@@ -4,28 +4,26 @@ import { SettingsInput } from "./common";
 
 const PersonalInfo = ({ navigation }) => {
   return (
-    <KeyboardAvoidingView behavior="padding">
-      <View style={styles.settingsContainer}>
-        <Text style={styles.profileHeader}>Profile</Text>
-        <View style={styles.sectionContainer}>
-          <Divider />
-          <SettingsInput label={"Age"} value={"29"} canEdit={false} />
-          <Divider />
-          <SettingsInput label={"Name"} value={"Matt"} canEdit={false} />
-          <Divider />
-          <SettingsInput label={"Gender"} value={"Man"} canEdit={false} />
+    <View style={styles.settingsContainer}>
+      <Text style={styles.profileHeader}>Profile</Text>
+      <View style={styles.sectionContainer}>
+        <Divider />
+        <SettingsInput label={"Age"} value={"29"} canEdit={false} />
+        <Divider />
+        <SettingsInput label={"Name"} value={"Matt"} canEdit={false} />
+        <Divider />
+        <SettingsInput label={"Gender"} value={"Man"} canEdit={false} />
 
-          <Divider />
-          <SettingsInput label={"Height"} canEdit={false} value={`5' 10"`} />
-          <Divider />
-          <SettingsInput label={"Occuptation"} value={`Student`} />
-          <Divider />
-          <SettingsInput label={"Location"} value={`New York, NY, US`} />
-          <Divider />
-          <Divider />
-        </View>
+        <Divider />
+        <SettingsInput label={"Height"} canEdit={false} value={`5' 10"`} />
+        <Divider />
+        <SettingsInput label={"Occuptation"} value={`Student`} />
+        <Divider />
+        <SettingsInput label={"Location"} value={`New York, NY, US`} />
+        <Divider />
+        <Divider />
       </View>
-    </KeyboardAvoidingView>
+    </View>
   );
 };
 

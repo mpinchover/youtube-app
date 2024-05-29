@@ -14,6 +14,7 @@ Email
 Password
 Mobile
 
+Keyboard avoid view https://www.youtube.com/watch?v=JmThlYvLYhQ
 Make occuptation, height seen on profile
 
 Modify edit profile header so allows tabs between pics, youtube vids and profile settings
