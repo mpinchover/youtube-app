@@ -19,6 +19,7 @@ import KeyboardAvoidView from "../keyboard";
 
 const ProfileSettings = ({ navigation }) => {
   return (
+    // <SafeAreaView style={{ flex: 1 }}>
     <KeyboardAvoidView>
       {/* <ScrollView style={{ flex: 1 }}> */}
       <PersonalInfo navigation={navigation} />
@@ -27,7 +28,6 @@ const ProfileSettings = ({ navigation }) => {
       <AccountSettings navigation={navigation} />
       <AccountSettings navigation={navigation} />
       <AccountSettings navigation={navigation} />
-      {/* </ScrollView> */}
     </KeyboardAvoidView>
   );
 };

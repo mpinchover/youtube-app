@@ -16,6 +16,7 @@ Mobile
 
 Keyboard avoid view https://www.youtube.com/watch?v=JmThlYvLYhQ
 Make occuptation, height seen on profile
+https://stackoverflow.com/questions/62071804/custom-tab-bar-react-navigation-5
 
 Modify edit profile header so allows tabs between pics, youtube vids and profile settings
 

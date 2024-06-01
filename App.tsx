@@ -39,6 +39,7 @@ import {
 import { StreamChat } from "stream-chat";
 import { chatApiKey, chatUserId } from "./src/config/stream";
 import KeyboardAvoidView from "./src/screens/keyboard";
+import TabBar from "./src/screens/tabbar";
 
 const Tab = createBottomTabNavigator();
 
@@ -101,31 +102,9 @@ const getHeaderTitle = (route) => {
 };
 
 const MainScreens = () => {
-  const [displayTabs, setDisplayTabs] = useState(true);
-  // const willShowKeyboardListener = () => {
-  //   // setDisplayTabs(false);
-  // };
-  // const willHideKeyboardListener = () => {
-  //   // setDisplayTabs(true);
-  // };
-
-  // useEffect(() => {
-  //   const keyboardDidShowListener = Keyboard.addListener(
-  //     "keyboardWillShow",
-  //     willShowKeyboardListener
-  //   );
-  //   const keyboardDidHideListener = Keyboard.addListener(
-  //     "keyboardWillHide",
-  //     willHideKeyboardListener
-  //   );
-
-  //   return () => {
-  //     keyboardDidHideListener.remove();
-  //     keyboardDidShowListener.remove();
-  //   };
-  // }, []);
   return (
     <Tab.Navigator
+      // tabBar={(props) => <TabBar {...props} />}
       screenOptions={({ route }) => {
         let icon;
         if (route.name === "Settings") {
@@ -139,9 +118,6 @@ const MainScreens = () => {
         }
         return {
           // tabBarHideOnKeyboard: true,
-          tabBarStyle: {
-            display: displayTabs ? "flex" : "none",
-          },
           tabBarIcon: ({ focused, color, size }) => {
             if (focused) {
               color = "black";
@@ -174,6 +150,13 @@ const MainScreens = () => {
         options={{
           headerShown: false,
         }}
+        name="Settings"
+        component={Settings}
+      />
+      <Tab.Screen
+        options={{
+          headerShown: false,
+        }}
         name="Discover"
         component={Discover}
       />
@@ -183,14 +166,6 @@ const MainScreens = () => {
         }}
         name="Messages"
         component={ChannelListScreen}
-      />
-
-      <Tab.Screen
-        options={{
-          headerShown: false,
-        }}
-        name="Settings"
-        component={Settings}
       />
     </Tab.Navigator>
   );
@@ -211,7 +186,9 @@ export default function App() {
         <SafeAreaView style={{ flex: 1 }}>
           <RecoilRoot>
             <NavigationContainer>
+              {/* <KeyboardAvoidView> */}
               <MainScreens />
+              {/* </KeyboardAvoidView> */}
             </NavigationContainer>
           </RecoilRoot>
         </SafeAreaView>
