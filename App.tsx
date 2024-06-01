@@ -3,6 +3,7 @@ import "react-native-gesture-handler";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import {
+  Keyboard,
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
@@ -10,6 +11,7 @@ import {
   View,
 } from "react-native";
 import * as React from "react";
+import { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { Entypo, FontAwesome } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -99,6 +101,29 @@ const getHeaderTitle = (route) => {
 };
 
 const MainScreens = () => {
+  const [displayTabs, setDisplayTabs] = useState(true);
+  // const willShowKeyboardListener = () => {
+  //   // setDisplayTabs(false);
+  // };
+  // const willHideKeyboardListener = () => {
+  //   // setDisplayTabs(true);
+  // };
+
+  // useEffect(() => {
+  //   const keyboardDidShowListener = Keyboard.addListener(
+  //     "keyboardWillShow",
+  //     willShowKeyboardListener
+  //   );
+  //   const keyboardDidHideListener = Keyboard.addListener(
+  //     "keyboardWillHide",
+  //     willHideKeyboardListener
+  //   );
+
+  //   return () => {
+  //     keyboardDidHideListener.remove();
+  //     keyboardDidShowListener.remove();
+  //   };
+  // }, []);
   return (
     <Tab.Navigator
       screenOptions={({ route }) => {
@@ -113,6 +138,10 @@ const MainScreens = () => {
           icon = <FontAwesome name="snapchat" size={24} color="black" />;
         }
         return {
+          // tabBarHideOnKeyboard: true,
+          tabBarStyle: {
+            display: displayTabs ? "flex" : "none",
+          },
           tabBarIcon: ({ focused, color, size }) => {
             if (focused) {
               color = "black";

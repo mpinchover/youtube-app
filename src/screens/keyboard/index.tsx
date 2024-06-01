@@ -12,11 +12,12 @@ import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 
 const KeyboardAvoidView = ({ children }) => {
   const { State: TextInputState } = TextInput;
-  const BUFFER = 40;
+  const BUFFER = 50;
   const offset = useRef(new Animated.Value(0)).current; // In
   const scrollViewRef = useRef<any>();
   const tabBarHeight = useBottomTabBarHeight();
   const [currentScrollPosition, setCurrentScrollPosition] = useState(0);
+  const [isKeyboardShowing, setIsKeyboardShowing] = useState(false);
 
   const onScroll = (event) => {
     setCurrentScrollPosition(event.nativeEvent.contentOffset.y);
@@ -43,6 +44,7 @@ const KeyboardAvoidView = ({ children }) => {
   }, []);
 
   const runMeasureHide = () => {
+    setIsKeyboardShowing(false);
     Animated.timing(offset, {
       toValue: 0,
       duration: 250,
@@ -51,6 +53,7 @@ const KeyboardAvoidView = ({ children }) => {
   };
 
   const runMeasureShow = (e: KeyboardEvent) => {
+    setIsKeyboardShowing(true);
     const currentlyFocusedField = TextInputState.currentlyFocusedInput();
 
     currentlyFocusedField &&
@@ -77,10 +80,11 @@ const KeyboardAvoidView = ({ children }) => {
         const amountToPushUp =
           distanceBottomEdgeOfViewFromTop - distanceTopOfKeyboardFromTop;
         console.log("Amount to push up", amountToPushUp);
+
         // if (distanceOfBottomEdgeOfViewFromBottom - BUFFER < tabBarHeight) {
         //   scrollViewRef.current.scrollTo({
         //     x: 0,
-        //     y: currentScrollPosition - 100,
+        //     y: currentScrollPosition + 100,
         //     animated: false,
         //   });
         // }
@@ -107,6 +111,14 @@ const KeyboardAvoidView = ({ children }) => {
       }}
     >
       {children}
+      <View
+        style={
+          {
+            // display: isKeyboardShowing ? "flex" : "none",
+            // height: 200,
+          }
+        }
+      ></View>
     </Animated.ScrollView>
   );
 };
