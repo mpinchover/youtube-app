@@ -36,6 +36,7 @@ import {
 } from "stream-chat-expo"; // Or stream-chat-expo
 import { StreamChat } from "stream-chat";
 import { chatApiKey, chatUserId } from "./src/config/stream";
+import KeyboardAvoidView from "./src/screens/keyboard";
 
 const Tab = createBottomTabNavigator();
 

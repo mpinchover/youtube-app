@@ -44,6 +44,7 @@ import MobileValidate from "./mobile-validate";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ProfileSettingsTabs from "./profile-settings";
 import AddVideoLink from "./add-video-link";
+import KeyboardAvoidView from "../keyboard";
 
 const images = [
   {

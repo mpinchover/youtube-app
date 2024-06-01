@@ -15,21 +15,20 @@ import VideoSelection from "./video-selection";
 import ImageSelectionGrid from "./image-selection";
 import { ReactElement, useState } from "react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import KeyboardAvoidView from "../keyboard";
 
 const ProfileSettings = ({ navigation }) => {
   return (
-    <KeyboardAwareScrollView
-      keyboardOpeningTime={330}
-      // extraHeight={}
-      contentContainerStyle={{ flexGrow: 1 }}
-    >
-      <PersonalInfo navigation={navigation} />
-      <Preferences navigation={navigation} />
-      <AccountSettings navigation={navigation} />
-      <AccountSettings navigation={navigation} />
-      <AccountSettings navigation={navigation} />
-      <AccountSettings navigation={navigation} />
-    </KeyboardAwareScrollView>
+    <KeyboardAvoidView>
+      <ScrollView style={{ flex: 1 }}>
+        <PersonalInfo navigation={navigation} />
+        <Preferences navigation={navigation} />
+        <AccountSettings navigation={navigation} />
+        <AccountSettings navigation={navigation} />
+        <AccountSettings navigation={navigation} />
+        <AccountSettings navigation={navigation} />
+      </ScrollView>
+    </KeyboardAvoidView>
   );
 };
 
@@ -76,6 +75,7 @@ export const HeaderTabs = ({ index, setIndex }) => {
         justifyContent: "center",
         paddingVertical: 10,
         borderRadius: 5,
+        zIndex: 10,
         // gap: 10,ss
       }}
     >
