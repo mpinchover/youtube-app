@@ -20,14 +20,14 @@ import KeyboardAvoidView from "../keyboard";
 const ProfileSettings = ({ navigation }) => {
   return (
     <KeyboardAvoidView>
-      <ScrollView style={{ flex: 1 }}>
-        <PersonalInfo navigation={navigation} />
-        <Preferences navigation={navigation} />
-        <AccountSettings navigation={navigation} />
-        <AccountSettings navigation={navigation} />
-        <AccountSettings navigation={navigation} />
-        <AccountSettings navigation={navigation} />
-      </ScrollView>
+      {/* <ScrollView style={{ flex: 1 }}> */}
+      <PersonalInfo navigation={navigation} />
+      <Preferences navigation={navigation} />
+      <AccountSettings navigation={navigation} />
+      <AccountSettings navigation={navigation} />
+      <AccountSettings navigation={navigation} />
+      <AccountSettings navigation={navigation} />
+      {/* </ScrollView> */}
     </KeyboardAvoidView>
   );
 };
