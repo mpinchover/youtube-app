@@ -183,15 +183,13 @@ export default function App() {
   return (
     <AppProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <SafeAreaView style={{ flex: 1 }}>
-          <RecoilRoot>
-            <NavigationContainer>
-              {/* <KeyboardAvoidView> */}
-              <MainScreens />
-              {/* </KeyboardAvoidView> */}
-            </NavigationContainer>
-          </RecoilRoot>
-        </SafeAreaView>
+        <RecoilRoot>
+          <NavigationContainer>
+            {/* <KeyboardAvoidView> */}
+            <MainScreens />
+            {/* </KeyboardAvoidView> */}
+          </NavigationContainer>
+        </RecoilRoot>
       </GestureHandlerRootView>
     </AppProvider>
   );
