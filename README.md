@@ -29,3 +29,13 @@ Use mongo probably for user profile and dating preferences
 Have an extra screen for settings
 
 Keyboard: shift + cmd + k or cmd + k to make it appear.
+
+onboarding
+
+- mobile number
+- gender
+- gender you are
+- pic yuoutube vids
+- pictures
+
+- username not real name

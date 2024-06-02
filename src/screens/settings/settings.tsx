@@ -80,10 +80,10 @@ const ProfilePreviewScreen = ({ navigation }) => {
 };
 
 const Stack = createStackNavigator();
-export let mainNav = null;
+// export let mainNav = null;
 
 const MainSettingsScreen = ({ navigation }) => {
-  mainNav = navigation;
+  // mainNav = navigation;
   return (
     // <SafeAreaView style={{ flex: 1, backgroundColor: "#8aa" }}>
 
