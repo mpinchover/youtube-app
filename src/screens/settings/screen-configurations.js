@@ -89,3 +89,23 @@ export const profilePreviewScreenConfig = ({ navigation }) => {
     },
   };
 };
+
+export const onboardingScreenConfig = ({ navigation }) => {
+  return {
+    headerRight: () => {
+      return (
+        <TouchableOpacity
+          style={{
+            flexDirection: "row",
+            gap: 5,
+            paddingHorizontal: 10,
+            alignItems: "center",
+          }}
+          onPress={() => navigation.navigate("ProfileSettingsTabs")}
+        >
+          <Text style={{ color: "#007AFF", fontSize: 14 }}>Edit</Text>
+        </TouchableOpacity>
+      );
+    },
+  };
+};

@@ -40,6 +40,7 @@ import { StreamChat } from "stream-chat";
 import { chatApiKey, chatUserId } from "./src/config/stream";
 import KeyboardAvoidView from "./src/screens/keyboard";
 import TabBar from "./src/screens/tabbar";
+import Onboarding from "./src/screens/onboarding";
 
 const Tab = createBottomTabNavigator();
 
@@ -99,6 +100,11 @@ const ChannelListScreen = (props) => {
 const getHeaderTitle = (route) => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? "Home";
   return routeName;
+};
+
+const MainApp = () => {
+  // return <MainScreens />;
+  return <Onboarding />;
 };
 
 const MainScreens = () => {
@@ -185,9 +191,7 @@ export default function App() {
       <GestureHandlerRootView style={{ flex: 1 }}>
         <RecoilRoot>
           <NavigationContainer>
-            {/* <KeyboardAvoidView> */}
-            <MainScreens />
-            {/* </KeyboardAvoidView> */}
+            <MainApp />
           </NavigationContainer>
         </RecoilRoot>
       </GestureHandlerRootView>

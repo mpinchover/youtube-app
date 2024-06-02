@@ -14,6 +14,7 @@ Email
 Password
 Mobile
 
+You should add a carousel to the onboarding view so it shows different categories of meeting people
 Keyboard avoid view https://www.youtube.com/watch?v=JmThlYvLYhQ
 Make occuptation, height seen on profile
 https://stackoverflow.com/questions/62071804/custom-tab-bar-react-navigation-5

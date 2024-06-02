@@ -1,4 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
+import Welcome from "./welcome";
+import { profilePreviewScreenConfig } from "../settings/screen-configurations";
 
 const Stack = createStackNavigator();
 
@@ -7,11 +9,15 @@ const Onboarding = () => {
     <Stack.Navigator>
       <Stack.Group>
         <Stack.Screen
-          name="Profile preview"
-          //   options={profilePreviewScreenConfig}
-          //   component={ProfilePreviewScreen}
+          name="Welcome"
+          options={{
+            headerShown: false,
+          }}
+          component={Welcome}
         />
       </Stack.Group>
     </Stack.Navigator>
   );
 };
+
+export default Onboarding;
